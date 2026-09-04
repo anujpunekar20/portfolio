@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge, Button, Card } from "@anuj20/void-ui";
+import Image from "next/image";
 import { projects } from "@/lib/data";
 import sectionStyles from "../Section.module.css";
 import styles from "./Projects.module.css";
@@ -14,9 +15,19 @@ export function Projects() {
         {projects.map((project) => (
           <Card key={project.name}>
             <div className={styles.cardInner}>
-              <div className={styles.imagePlaceholder}>
-                Drop a void-ui screenshot
-              </div>
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={`${project.name} screenshot`}
+                  width={900}
+                  height={280}
+                  className={styles.image}
+                />
+              ) : (
+                <div className={styles.imagePlaceholder}>
+                  Drop a {project.name} screenshot
+                </div>
+              )}
               <div className={styles.title}>{project.name}</div>
               <p className={styles.desc}>{project.desc}</p>
               <div className={styles.tags}>
