@@ -1,0 +1,39 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 3rem;
+  max-width: 56.25rem;
+  box-sizing: border-box;
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  color: var(--void-accent);
+  letter-spacing: 0.125rem;
+}
+
+.heading {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.tagline {
+  font-size: 1.25rem;
+  color: var(--void-text-muted);
+  line-height: 1.6;
+  max-width: 40rem;
+  /* base gap (1rem) covers heading->tagline's 16px; this delta brings it to the spec's 20px */
+  margin-top: 0.25rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  /* base gap (1rem) covers tagline->actions' 16px; this delta brings it to the spec's 36px */
+  margin-top: 1.25rem;
+}
