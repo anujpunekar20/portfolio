@@ -5,17 +5,20 @@ import { Work } from "@/components/Work/Work";
 import { Projects } from "@/components/Projects/Projects";
 import { Contact } from "@/components/Contact/Contact";
 import { Footer } from "@/components/Footer/Footer";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <>
       <Nav />
-      <Hero />
-      <About />
-      <Work />
-      <Projects />
-      <Contact />
-      <Footer />
+      <div className={styles.scrollArea}>
+        <Hero />
+        <About />
+        <Work />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
     </>
   );
 }
