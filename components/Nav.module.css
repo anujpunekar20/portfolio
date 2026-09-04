@@ -1,0 +1,34 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  border-bottom: 1px solid var(--void-border);
+  background: rgba(10, 10, 10, 0.9);
+}
+
+.logo {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--void-text-primary);
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.links a {
+  font-size: 0.875rem;
+  color: var(--void-text-muted);
+}
+
+.links a:hover {
+  color: var(--void-text-primary);
+}
