@@ -6,6 +6,7 @@ import styles from "./Hero.module.css";
 export function Hero() {
   return (
     <section id="home" className={styles.hero}>
+      {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- literal copy, not a stray comment */}
       <div className={styles.eyebrow}>// PORTFOLIO</div>
       <h1 className={styles.heading}>Hi, I&apos;m Anuj Punekar</h1>
       <p className={styles.tagline}>
