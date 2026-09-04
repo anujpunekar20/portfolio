@@ -1,7 +1,9 @@
 "use client";
 
-import { Button } from "@anuj20/void-ui";
+import { Tooltip } from "@anuj20/void-ui";
+import { GithubIcon, LinkedinIcon, MailIcon } from "../Icons";
 import sectionStyles from "../Section.module.css";
+import iconChipStyles from "../IconChip.module.css";
 import styles from "./Contact.module.css";
 
 export function Contact() {
@@ -14,29 +16,46 @@ export function Contact() {
         these ways.
       </p>
       <div className={styles.actions}>
-        <a href="mailto:anujkakarot@gmail.com">
-          <Button variant="solid" size="lg">
-            anujkakarot@gmail.com
-          </Button>
-        </a>
-        <a
-          href="https://www.linkedin.com/in/anuj-punekar"
-          target="_blank"
-          rel="noopener"
-        >
-          <Button variant="outline" size="lg">
-            LinkedIn
-          </Button>
-        </a>
-        <a
-          href="https://github.com/anujpunekar20"
-          target="_blank"
-          rel="noopener"
-        >
-          <Button variant="outline" size="lg">
-            GitHub
-          </Button>
-        </a>
+        <Tooltip
+          label="Email"
+          trigger={
+            <a
+              href="mailto:anujkakarot@gmail.com"
+              aria-label="Email"
+              className={iconChipStyles.iconChip}
+            >
+              <MailIcon />
+            </a>
+          }
+        />
+        <Tooltip
+          label="LinkedIn"
+          trigger={
+            <a
+              href="https://www.linkedin.com/in/anuj-punekar"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+              className={iconChipStyles.iconChip}
+            >
+              <LinkedinIcon />
+            </a>
+          }
+        />
+        <Tooltip
+          label="GitHub"
+          trigger={
+            <a
+              href="https://github.com/anujpunekar20"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+              className={iconChipStyles.iconChip}
+            >
+              <GithubIcon />
+            </a>
+          }
+        />
       </div>
     </section>
   );

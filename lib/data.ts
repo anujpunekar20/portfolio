@@ -56,6 +56,7 @@ export interface Project {
   tags: string[];
   github: string;
   image?: string;
+  live?: string;
 }
 
 export const projects: Project[] = [
@@ -65,5 +66,6 @@ export const projects: Project[] = [
     tags: ["React", "TypeScript", "StyleX"],
     github: "https://github.com/anujpunekar20/void-ui",
     image: "/screenshots/void-ui.png",
+    live: "https://anujpunekar20.github.io/void-ui/",
   },
 ];
