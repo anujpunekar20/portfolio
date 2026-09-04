@@ -13,9 +13,9 @@ export function About() {
         Full-stack developer, systems-minded.
       </h2>
       <p className={styles.bio}>
-        I build backend services and frontend interfaces across whatever
-        stack the problem calls for — Go APIs, Svelte wizards, React
-        libraries. Off the clock: probably making a video game.
+        I build backend services and frontend interfaces across whatever stack
+        the problem calls for — Go APIs, Svelte wizards, React libraries. Off
+        the clock: probably making a video game.
       </p>
       <div className={styles.skills}>
         {skills.map((skill) => (
