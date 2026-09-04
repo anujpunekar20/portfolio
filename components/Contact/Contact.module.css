@@ -1,0 +1,16 @@
+.intro {
+  font-size: 1rem;
+  color: var(--void-text-muted);
+  max-width: 37.5rem;
+  margin: 0;
+  /* base gap (1rem) covers heading->intro's 16px; this delta brings it to the spec's 20px */
+  margin-top: 0.25rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  /* base gap (1rem) covers intro->actions' 16px; this delta brings it to the spec's 32px */
+  margin-top: 1rem;
+}

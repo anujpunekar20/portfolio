@@ -1,0 +1,15 @@
+.footer {
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--void-border);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--void-text-disabled);
+  box-sizing: border-box;
+}
+
+.available {
+  color: var(--void-accent);
+}
