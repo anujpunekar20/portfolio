@@ -1,0 +1,43 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* base gap (1rem) on the section covers heading->list's 16px; this delta brings it to the spec's 40px */
+  margin-top: 1.5rem;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.company {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.role {
+  font-size: 0.875rem;
+  color: var(--void-accent);
+}
+
+.dates {
+  font-size: 0.8125rem;
+  color: var(--void-text-muted);
+}
+
+.desc {
+  font-size: 0.9375rem;
+  color: var(--void-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
