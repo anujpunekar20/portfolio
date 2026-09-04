@@ -11,3 +11,17 @@ body {
   color: var(--void-text-primary);
   font-family: var(--void-font-mono), Arial, Helvetica, sans-serif;
 }
+
+a {
+  color: var(--void-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--void-accent-hover);
+}
+
+::selection {
+  background: var(--void-accent);
+  color: var(--void-bg-base);
+}
