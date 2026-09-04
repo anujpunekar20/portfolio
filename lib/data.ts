@@ -50,6 +50,7 @@ export interface Project {
   desc: string;
   tags: string[];
   github: string;
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -58,5 +59,6 @@ export const projects: Project[] = [
     desc: "A dark-first React component library with a sharp, brutalist look — no rounded corners, no shadows, one accent color.",
     tags: ["React", "TypeScript", "StyleX"],
     github: "https://github.com/anujpunekar20/void-ui",
+    image: "/screenshots/void-ui.png",
   },
 ];
