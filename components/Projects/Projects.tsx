@@ -1,9 +1,11 @@
 "use client";
 
-import { Badge, Button, Card } from "@anuj20/void-ui";
+import { Badge, Card, Tooltip } from "@anuj20/void-ui";
 import Image from "next/image";
+import { ExternalLinkIcon, GithubIcon } from "../Icons";
 import { projects } from "@/lib/data";
 import sectionStyles from "../Section.module.css";
+import iconChipStyles from "../IconChip.module.css";
 import styles from "./Projects.module.css";
 
 export function Projects() {
@@ -37,14 +39,38 @@ export function Projects() {
                   </Badge>
                 ))}
               </div>
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener"
-                className={styles.githubLink}
-              >
-                <Button variant="outline">View on GitHub</Button>
-              </a>
+              <div className={styles.links}>
+                <Tooltip
+                  label="GitHub"
+                  trigger={
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label="GitHub"
+                      className={iconChipStyles.iconChip}
+                    >
+                      <GithubIcon />
+                    </a>
+                  }
+                />
+                {project.live && (
+                  <Tooltip
+                    label="Live"
+                    trigger={
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="Live"
+                        className={iconChipStyles.iconChip}
+                      >
+                        <ExternalLinkIcon />
+                      </a>
+                    }
+                  />
+                )}
+              </div>
             </div>
           </Card>
         ))}

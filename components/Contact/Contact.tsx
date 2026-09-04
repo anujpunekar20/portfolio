@@ -3,6 +3,7 @@
 import { Tooltip } from "@anuj20/void-ui";
 import { GithubIcon, LinkedinIcon, MailIcon } from "../Icons";
 import sectionStyles from "../Section.module.css";
+import iconChipStyles from "../IconChip.module.css";
 import styles from "./Contact.module.css";
 
 export function Contact() {
@@ -21,7 +22,7 @@ export function Contact() {
             <a
               href="mailto:anujkakarot@gmail.com"
               aria-label="Email"
-              className={styles.iconChip}
+              className={iconChipStyles.iconChip}
             >
               <MailIcon />
             </a>
@@ -35,7 +36,7 @@ export function Contact() {
               target="_blank"
               rel="noopener"
               aria-label="LinkedIn"
-              className={styles.iconChip}
+              className={iconChipStyles.iconChip}
             >
               <LinkedinIcon />
             </a>
@@ -49,7 +50,7 @@ export function Contact() {
               target="_blank"
               rel="noopener"
               aria-label="GitHub"
-              className={styles.iconChip}
+              className={iconChipStyles.iconChip}
             >
               <GithubIcon />
             </a>

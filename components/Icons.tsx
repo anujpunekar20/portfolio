@@ -31,6 +31,26 @@ export function GithubIcon() {
   );
 }
 
+export function ExternalLinkIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M9 6H5.5A2.5 2.5 0 0 0 3 8.5v10A2.5 2.5 0 0 0 5.5 21h10a2.5 2.5 0 0 0 2.5-2.5V15" />
+      <path d="M13 3h8v8" />
+      <path d="M21 3 10.5 13.5" />
+    </svg>
+  );
+}
+
 export function LinkedinIcon() {
   return (
     <svg

@@ -14,28 +14,3 @@
   /* base gap (1rem) covers intro->actions' 16px; this delta brings it to the spec's 32px */
   margin-top: 1rem;
 }
-
-.iconChip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border: 1px solid var(--void-border);
-  color: var(--void-text-primary);
-  box-shadow: 3px 3px 0 0 var(--void-border);
-  transition: all 150ms ease-out;
-  box-sizing: border-box;
-}
-
-.iconChip:hover {
-  color: var(--void-accent);
-  border-color: var(--void-accent);
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 0 var(--void-border);
-}
-
-.iconChip:active {
-  transform: translate(3px, 3px);
-  box-shadow: none;
-}
