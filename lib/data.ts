@@ -16,6 +16,7 @@ export interface Job {
   role: string;
   dates: string;
   desc: string;
+  logo?: string;
 }
 
 export const experience: Job[] = [
@@ -24,24 +25,28 @@ export const experience: Job[] = [
     role: "Associate Software Engineer",
     dates: "Apr '26 — Present",
     desc: "Building the RFQ module and equipment management tooling in Vue.js.",
+    logo: "/logos/codesmithdev.jpg",
   },
   {
     company: "Wauld",
     role: "Associate Software Engineer",
     dates: "Jul '25 — Apr '26",
     desc: "Owned the Go credential API — 5,000+ credentials issued for 350+ users.",
+    logo: "/logos/wauld.jpg",
   },
   {
     company: "Codesmithdev (ALTA / Edopia)",
     role: "Associate Software Engineer",
     dates: "Dec '24 — Jul '25",
     desc: "Built the Svelte intake wizard and Avatar Studio.",
+    logo: "/logos/codesmithdev.jpg",
   },
   {
     company: "Appointy",
     role: "Software Engineer Intern",
     dates: "May '24 — Jul '24",
     desc: "Shipped Go REST/gRPC APIs and GraphQL endpoints.",
+    logo: "/logos/appointy.png",
   },
 ];
 

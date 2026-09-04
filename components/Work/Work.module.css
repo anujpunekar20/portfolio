@@ -20,6 +20,19 @@
   gap: 0.5rem;
 }
 
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border: 1px solid var(--void-border);
+}
+
 .company {
   font-size: 1.125rem;
   font-weight: 700;
