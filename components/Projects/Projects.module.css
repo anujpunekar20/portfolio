@@ -1,0 +1,53 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* base gap (1rem) on the section covers heading->list's 16px; this delta brings it to the spec's 40px */
+  margin-top: 1.5rem;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 17.5rem;
+  border: 1px solid var(--void-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--void-text-disabled);
+  font-size: 0.875rem;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  /* base gap (0.5rem) covers image->title's 8px; this delta brings it to the spec's 20px */
+  margin-top: 0.75rem;
+}
+
+.desc {
+  font-size: 0.9375rem;
+  color: var(--void-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  /* base gap (0.5rem) covers desc->tags's 8px; this delta brings it to the spec's 16px */
+  margin-top: 0.5rem;
+}
+
+.githubLink {
+  align-self: flex-start;
+  /* base gap (0.5rem) covers tags->button's 8px; this delta brings it to the spec's 20px */
+  margin-top: 0.75rem;
+}
