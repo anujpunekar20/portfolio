@@ -1,0 +1,19 @@
+# Ignore artifacts:
+build
+coverage
+
+# Next.js build output
+.next
+out
+
+# Package manager
+pnpm-lock.yaml
+
+# Locked design reference files (untracked, not to be reformatted)
+DESIGN.md
+Portfolio.dc.html
+void-ui-tokens.css
+
+# Local-only project docs (untracked, see .git/info/exclude)
+CLAUDE.md
+AGENTS.md
