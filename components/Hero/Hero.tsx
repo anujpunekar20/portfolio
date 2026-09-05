@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@anuj20/void-ui";
+import { scrollToSection } from "@/lib/scroll";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -13,7 +14,7 @@ export function Hero() {
         Your go-to full-stack dev with a knack for video games.
       </p>
       <div className={styles.actions}>
-        <a href="#projects">
+        <a href="#projects" onClick={(e) => scrollToSection(e, "projects")}>
           <Button variant="solid" size="lg">
             View Projects
           </Button>
