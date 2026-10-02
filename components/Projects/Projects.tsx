@@ -18,7 +18,7 @@ export function Projects() {
         {projects.map((project) => (
           <Card key={project.name}>
             <div className={styles.cardInner}>
-              {project.image ? (
+              {project.image && (
                 <Image
                   src={project.image}
                   alt={`${project.name} screenshot`}
@@ -26,10 +26,6 @@ export function Projects() {
                   height={300}
                   className={styles.image}
                 />
-              ) : (
-                <div className={styles.imagePlaceholder}>
-                  Drop a {project.name} screenshot
-                </div>
               )}
               <div className={styles.content}>
                 <div className={styles.title}>{project.name}</div>
