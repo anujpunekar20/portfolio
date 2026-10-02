@@ -1,18 +1,17 @@
 "use client";
 
-import { skillGroups } from "@/lib/data";
-import { SkillChip } from "../SkillChip/SkillChip";
+import { ChipGroups } from "../ChipGroups/ChipGroups";
 import sectionStyles from "../Section.module.css";
 import styles from "./About.module.css";
 
 const games = [
   {
     label: "Playing",
-    titles: ["VALORANT", "Overwatch", "Rocket League", "Marvel Rivals"],
+    items: ["VALORANT", "Overwatch", "Rocket League", "Marvel Rivals"],
   },
   {
     label: "Favorites",
-    titles: [
+    items: [
       "Elden Ring",
       "Dishonored",
       "Celeste",
@@ -35,29 +34,8 @@ export function About() {
         the problem calls for — Go APIs, Svelte wizards, React libraries. Off
         the clock: probably making a video game.
       </p>
-      <div className={styles.groups}>
-        {skillGroups.map((group) => (
-          <div key={group.label} className={styles.group}>
-            <h3 className={styles.groupLabel}>{group.label}</h3>
-            <div className={styles.skills}>
-              {group.skills.map((skill) => (
-                <SkillChip key={skill} name={skill} />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className={`${styles.groups} ${styles.games}`}>
-        {games.map((group) => (
-          <div key={group.label} className={styles.group}>
-            <h3 className={styles.groupLabel}>{group.label}</h3>
-            <div className={styles.skills}>
-              {group.titles.map((title) => (
-                <SkillChip key={title} name={title} />
-              ))}
-            </div>
-          </div>
-        ))}
+      <div className={styles.games}>
+        <ChipGroups groups={games} />
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 export const skillGroups = [
   {
     label: "Backend",
-    skills: [
+    items: [
       "Golang",
       "Python",
       "gRPC",
@@ -15,7 +15,7 @@ export const skillGroups = [
   },
   {
     label: "Frontend",
-    skills: [
+    items: [
       "TypeScript",
       "JavaScript",
       "Svelte",
@@ -28,12 +28,12 @@ export const skillGroups = [
   },
   {
     label: "Databases",
-    skills: ["PostgreSQL", "MySQL", "MongoDB", "Ent ORM", "SQLC"],
+    items: ["PostgreSQL", "MySQL", "MongoDB", "Ent ORM", "SQLC"],
   },
-  { label: "Cloud", skills: ["AWS", "GCP"] },
+  { label: "Cloud", items: ["AWS", "GCP"] },
   {
     label: "Tools",
-    skills: [
+    items: [
       "Docker",
       "Git",
       "GitHub Actions",

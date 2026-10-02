@@ -2,7 +2,8 @@
 
 import { Card } from "@anuj20/void-ui";
 import Image from "next/image";
-import { experience } from "@/lib/data";
+import { experience, skillGroups } from "@/lib/data";
+import { ChipGroups } from "../ChipGroups/ChipGroups";
 import { SkillChip } from "../SkillChip/SkillChip";
 import sectionStyles from "../Section.module.css";
 import styles from "./Work.module.css";
@@ -18,6 +19,9 @@ export function Work() {
         Comfortable with API design, schema design, and component-driven UI
         across fast-moving product teams.
       </p>
+      <div className={styles.skills}>
+        <ChipGroups groups={skillGroups} />
+      </div>
       <div className={styles.list}>
         {experience.map((job, i) => (
           <Card key={job.company}>
