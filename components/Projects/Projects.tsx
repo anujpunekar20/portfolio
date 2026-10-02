@@ -1,7 +1,8 @@
 "use client";
 
-import { Badge, Card, Tooltip } from "@anuj20/void-ui";
+import { Card, Tooltip } from "@anuj20/void-ui";
 import Image from "next/image";
+import { SkillChip } from "../SkillChip/SkillChip";
 import { ExternalLinkIcon, GithubIcon } from "../Icons";
 import { projects } from "@/lib/data";
 import sectionStyles from "../Section.module.css";
@@ -21,8 +22,8 @@ export function Projects() {
                 <Image
                   src={project.image}
                   alt={`${project.name} screenshot`}
-                  width={900}
-                  height={280}
+                  width={480}
+                  height={300}
                   className={styles.image}
                 />
               ) : (
@@ -30,46 +31,46 @@ export function Projects() {
                   Drop a {project.name} screenshot
                 </div>
               )}
-              <div className={styles.title}>{project.name}</div>
-              <p className={styles.desc}>{project.desc}</p>
-              <div className={styles.tags}>
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="default">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <div className={styles.links}>
-                <Tooltip
-                  label="GitHub"
-                  trigger={
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener"
-                      aria-label="GitHub"
-                      className={iconChipStyles.iconChip}
-                    >
-                      <GithubIcon />
-                    </a>
-                  }
-                />
-                {project.live && (
+              <div className={styles.content}>
+                <div className={styles.title}>{project.name}</div>
+                <p className={styles.desc}>{project.desc}</p>
+                <div className={styles.tags}>
+                  {project.tags.map((tag) => (
+                    <SkillChip key={tag} name={tag} />
+                  ))}
+                </div>
+                <div className={styles.links}>
                   <Tooltip
-                    label="Live"
+                    label="GitHub"
                     trigger={
                       <a
-                        href={project.live}
+                        href={project.github}
                         target="_blank"
                         rel="noopener"
-                        aria-label="Live"
+                        aria-label="GitHub"
                         className={iconChipStyles.iconChip}
                       >
-                        <ExternalLinkIcon />
+                        <GithubIcon />
                       </a>
                     }
                   />
-                )}
+                  {project.live && (
+                    <Tooltip
+                      label="Live"
+                      trigger={
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener"
+                          aria-label="Live"
+                          className={iconChipStyles.iconChip}
+                        >
+                          <ExternalLinkIcon />
+                        </a>
+                      }
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </Card>
