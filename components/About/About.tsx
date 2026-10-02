@@ -1,7 +1,7 @@
 "use client";
 
-import { Badge } from "@anuj20/void-ui";
-import { skills } from "@/lib/data";
+import { skillGroups } from "@/lib/data";
+import { SkillChip } from "../SkillChip/SkillChip";
 import sectionStyles from "../Section.module.css";
 import styles from "./About.module.css";
 
@@ -17,11 +17,16 @@ export function About() {
         the problem calls for — Go APIs, Svelte wizards, React libraries. Off
         the clock: probably making a video game.
       </p>
-      <div className={styles.skills}>
-        {skills.map((skill) => (
-          <Badge key={skill} variant="outline">
-            {skill}
-          </Badge>
+      <div className={styles.groups}>
+        {skillGroups.map((group) => (
+          <div key={group.label} className={styles.group}>
+            <h3 className={styles.groupLabel}>{group.label}</h3>
+            <div className={styles.skills}>
+              {group.skills.map((skill) => (
+                <SkillChip key={skill} name={skill} />
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </section>

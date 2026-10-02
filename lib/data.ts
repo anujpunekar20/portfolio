@@ -1,15 +1,52 @@
-export const skills = [
-  "Golang",
-  "Node.js",
-  "Svelte",
-  "Vue",
-  "React",
-  "TypeScript",
-  "PostgreSQL",
-  "Docker",
-  "MySQL",
-  "AWS",
-] as const;
+export const skillGroups = [
+  {
+    label: "Backend",
+    skills: [
+      "Golang",
+      "Python",
+      "gRPC",
+      "ConnectRPC",
+      "Protocol Buffers",
+      "REST APIs",
+      "GraphQL",
+      "Node.js",
+      "Express.js",
+    ],
+  },
+  {
+    label: "Frontend",
+    skills: [
+      "TypeScript",
+      "JavaScript",
+      "Svelte",
+      "SvelteKit",
+      "Vue",
+      "React",
+      "Tailwind CSS",
+      "StyleX",
+    ],
+  },
+  {
+    label: "Databases",
+    skills: ["PostgreSQL", "MySQL", "MongoDB", "Ent ORM", "SQLC"],
+  },
+  { label: "Cloud", skills: ["AWS", "GCP"] },
+  {
+    label: "Tools",
+    skills: [
+      "Docker",
+      "Git",
+      "GitHub Actions",
+      "Buf",
+      "Typst",
+      "Figma",
+      "Playwright",
+    ],
+  },
+];
+
+export const summary =
+  "Full-stack developer with 1.5+ years shipping features end-to-end, from Go and gRPC APIs and PostgreSQL schemas to Vue and Svelte frontends. Comfortable with API design, schema design, and component-driven UI across fast-moving product teams.";
 
 export interface Job {
   company: string;
@@ -17,6 +54,8 @@ export interface Job {
   dates: string;
   desc: string;
   logo?: string;
+  stack: string[];
+  projects: { name?: string; bullets: string[] }[];
 }
 
 export const experience: Job[] = [
@@ -26,6 +65,16 @@ export const experience: Job[] = [
     dates: "Apr '26 — Present",
     desc: "Building the RFQ module and equipment management tooling in Vue.js.",
     logo: "/logos/codesmithdev.jpg",
+    stack: ["Vue", "Tailwind CSS"],
+    projects: [
+      {
+        name: "Mechanical X Advantage: HVAC services platform",
+        bullets: [
+          "Led the RFQ module: vendor invitation, an external review surface for vendors, and accept/reject flows with role-based views.",
+          "Built equipment management: a categorized form with inline validation, equipment ID tracking, and a paginated asset list.",
+        ],
+      },
+    ],
   },
   {
     company: "Wauld",
@@ -33,6 +82,18 @@ export const experience: Job[] = [
     dates: "Jul '25 — Apr '26",
     desc: "Owned the Go credential API — 5,000+ credentials issued for 350+ users.",
     logo: "/logos/wauld.jpg",
+    stack: ["Golang", "ConnectRPC", "Ent ORM", "PostgreSQL", "SvelteKit"],
+    projects: [
+      {
+        bullets: [
+          "Owned the credential lifecycle API in Go (issuance, revocation, expiry, downloads) serving 5,000+ credentials across 350+ users with role-based access.",
+          "Built the image-attribute feature end-to-end: data model, API contracts, a draft/publish flow, and the Svelte designer UI.",
+          "Shipped bulk credential operations (send, void, download, reporting) with async email notifications.",
+          "Added a credential-expiry notification pipeline with graduated alerts and a background migration worker.",
+          "Delivered the credential change-request flow: recipient submission UI, publish-only gating, admin alerts, and re-issuance.",
+        ],
+      },
+    ],
   },
   {
     company: "Codesmithdev (ALTA / Edopia)",
@@ -40,6 +101,23 @@ export const experience: Job[] = [
     dates: "Dec '24 — Jul '25",
     desc: "Built the Svelte intake wizard and Avatar Studio.",
     logo: "/logos/codesmithdev.jpg",
+    stack: ["Golang", "Svelte", "TypeScript", "PostgreSQL", "Typst"],
+    projects: [
+      {
+        name: "ALTA: language assessment platform",
+        bullets: [
+          "Architected a branching multi-step intake wizard that adapts by department and role to recommend an assessment and quote pricing, integrated with HubSpot.",
+          "Enforced field-level and cross-field validation with step-progress persistence to cut drop-off.",
+        ],
+      },
+      {
+        name: "Edopia: AI-powered learning platform",
+        bullets: [
+          "Shipped the Avatar Studio: a Go service layer and a gamified Svelte UI with five progression levels and a live layered preview.",
+          "Built a Typst PDF pipeline that emails formatted documents, plus four student lifecycle notifications.",
+        ],
+      },
+    ],
   },
   {
     company: "Appointy",
@@ -47,6 +125,15 @@ export const experience: Job[] = [
     dates: "May '24 — Jul '24",
     desc: "Shipped Go REST/gRPC APIs and GraphQL endpoints.",
     logo: "/logos/appointy.png",
+    stack: ["Golang", "gRPC", "GraphQL"],
+    projects: [
+      {
+        bullets: [
+          "Built REST APIs in Go with a REST-to-gRPC adapter over internal services, and integrated GraphQL via Jaal.",
+          "Wrote error-normalization middleware mapping gRPC status codes to consistent HTTP payloads with request-scoped logging.",
+        ],
+      },
+    ],
   },
 ];
 
