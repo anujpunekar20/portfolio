@@ -26,13 +26,13 @@ export function About() {
   return (
     <section id="about" className={sectionStyles.section}>
       <div className={sectionStyles.eyebrow}>01 / ABOUT</div>
-      <h2 className={sectionStyles.heading}>
-        Full-stack developer, systems-minded.
-      </h2>
+      <h2 className={sectionStyles.heading}>A gamer who builds things.</h2>
       <p className={styles.bio}>
-        I build backend services and frontend interfaces across whatever stack
-        the problem calls for — Go APIs, Svelte wizards, React libraries. Off
-        the clock: probably making a video game.
+        I&apos;m a big-time gamer, and it shows in how I build: I care about
+        fast feedback, tight controls, and details that feel good to use.
+        That&apos;s why there&apos;s a Tetris game hiding on this page — hit ▶
+        PLAY. When I&apos;m not playing, I&apos;m probably making a game of my
+        own.
       </p>
       <div className={styles.games}>
         <ChipGroups groups={games} />
