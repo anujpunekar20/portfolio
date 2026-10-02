@@ -1,16 +1,20 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+import { OPEN_COMMAND_PALETTE_EVENT } from "@/lib/events";
+import { scrollToSection } from "@/lib/scroll";
 import styles from "./Nav.module.css";
-import { scrollToSection, type SectionId } from "@/lib/scroll";
 
-const links: { id: SectionId; label: string }[] = [
-  { id: "about", label: "About" },
-  { id: "work", label: "Work" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
+const noopSubscribe = () => () => {};
 
 export function Nav() {
+  // navigator isn't available during SSR, so server and first client render use the Ctrl label
+  const isMac = useSyncExternalStore(
+    noopSubscribe,
+    () => /Mac/.test(navigator.userAgent),
+    () => false,
+  );
+
   return (
     <nav className={styles.nav}>
       <a
@@ -20,17 +24,18 @@ export function Nav() {
       >
         AP_
       </a>
-      <div className={styles.links}>
-        {links.map((link) => (
-          <a
-            key={link.id}
-            href={`#${link.id}`}
-            onClick={(event) => scrollToSection(event, link.id)}
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+      <button
+        type="button"
+        className={styles.paletteButton}
+        onClick={() =>
+          window.dispatchEvent(new Event(OPEN_COMMAND_PALETTE_EVENT))
+        }
+      >
+        <span className={styles.keyboardLabel}>
+          Press {isMac ? "⌘" : "Ctrl "} + K
+        </span>
+        <span className={styles.touchLabel}>Menu</span>
+      </button>
     </nav>
   );
 }

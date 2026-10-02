@@ -5,6 +5,7 @@ import { Work } from "@/components/Work/Work";
 import { Projects } from "@/components/Projects/Projects";
 import { Contact } from "@/components/Contact/Contact";
 import { Footer } from "@/components/Footer/Footer";
+import { CommandPalette } from "@/components/CommandPalette/CommandPalette";
 import { Tetris } from "@/components/Tetris/Tetris";
 import styles from "./page.module.css";
 
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <Nav />
       <Tetris />
+      <CommandPalette />
       <div className={styles.scrollArea}>
         <Hero />
         <About />
