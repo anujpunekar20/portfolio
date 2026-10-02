@@ -16,17 +16,39 @@
   color: var(--void-text-primary);
 }
 
-.links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.links a {
-  font-size: 0.875rem;
+.paletteButton {
+  background: transparent;
+  border: 1px solid var(--void-border);
   color: var(--void-text-muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition:
+    color 150ms ease-out,
+    border-color 150ms ease-out;
 }
 
-.links a:hover {
-  color: var(--void-text-primary);
+.paletteButton:hover {
+  color: var(--void-accent);
+  border-color: var(--void-accent);
+}
+
+.touchLabel {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .keyboardLabel {
+    display: none;
+  }
+
+  .touchLabel {
+    display: inline;
+  }
+
+  .paletteButton {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+  }
 }

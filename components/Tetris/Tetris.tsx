@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { PLAY_TETRIS_EVENT } from "@/lib/events";
 import {
   BLOCK_SIZE,
   collides,
@@ -25,6 +26,20 @@ export function Tetris() {
 
   const gridRef = useRef<Cell[][]>([]);
   const pieceRef = useRef<Piece | null>(null);
+
+  const startGame = useCallback(() => {
+    setBoardSize({
+      cols: Math.floor(window.innerWidth / 2 / BLOCK_SIZE),
+      rows: Math.floor(window.innerHeight / 2 / BLOCK_SIZE),
+    });
+    setScore(0);
+    setActive(true);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener(PLAY_TETRIS_EVENT, startGame);
+    return () => window.removeEventListener(PLAY_TETRIS_EVENT, startGame);
+  }, [startGame]);
 
   useEffect(() => {
     if (!active) return;
@@ -71,6 +86,9 @@ export function Tetris() {
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      // ignore keys typed into the command palette's input while a game is running
+      if (event.target instanceof HTMLInputElement) return;
+
       const piece = pieceRef.current;
       if (!piece) return;
 
@@ -161,17 +179,7 @@ export function Tetris() {
 
   if (!active) {
     return (
-      <button
-        className={styles.playButton}
-        onClick={() => {
-          setBoardSize({
-            cols: Math.floor(window.innerWidth / 2 / BLOCK_SIZE),
-            rows: Math.floor(window.innerHeight / 2 / BLOCK_SIZE),
-          });
-          setScore(0);
-          setActive(true);
-        }}
-      >
+      <button className={styles.playButton} onClick={startGame}>
         ▶ PLAY
       </button>
     );
