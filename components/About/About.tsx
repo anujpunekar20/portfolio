@@ -31,8 +31,7 @@ export function About() {
         I&apos;m a big-time gamer, and it shows in how I build: I care about
         fast feedback, tight controls, and details that feel good to use.
         That&apos;s why there&apos;s a Tetris game hiding on this page — hit ▶
-        PLAY. When I&apos;m not playing, I&apos;m probably making a game of my
-        own.
+        PLAY.
       </p>
       <div className={styles.games}>
         <ChipGroups groups={games} />
