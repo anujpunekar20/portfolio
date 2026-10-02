@@ -21,7 +21,6 @@
   justify-content: center;
   color: var(--void-text-disabled);
   font-size: 0.875rem;
-  box-sizing: border-box;
 }
 
 .image {
@@ -29,7 +28,6 @@
   height: 17.5rem;
   object-fit: cover;
   border: 1px solid var(--void-border);
-  box-sizing: border-box;
 }
 
 .title {

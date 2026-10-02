@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@anuj20/void-ui':
-        specifier: ^0.1.1
-        version: 0.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^0.1.2
+        version: 0.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next:
         specifier: 16.3.4
         version: 16.3.4(@babel/core@7.29.7)(@types/node@20.19.43)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -48,8 +48,8 @@ importers:
 
 packages:
 
-  '@anuj20/void-ui@0.1.1':
-    resolution: {integrity: sha512-Sq/UfdQehME8qmmzgAOE0JEqgzB92fNRb9O3chsoXwLcTZ2piEuIHWbLvhAePFsTCLqdg6gmgV/V8riHQoCkfQ==}
+  '@anuj20/void-ui@0.1.2':
+    resolution: {integrity: sha512-ySP1xrcqV8PLZjJCMl4Wp4+LdkeJiDJUjn+fvMYSpzwEcNQFp3raSrsRjhHEysUaHWGo9NUjg1Z0TxabGffE8g==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -460,8 +460,8 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@stylexjs/stylex@0.19.0':
-    resolution: {integrity: sha512-CnUFp7YMaDLDeemsWOfJgoC/gKM5P/yBNMcpJaE6ChJmXr7s0DJwSeGTTlHJcqqwN9OW1qGtmARWLFhGZN1pTA==}
+  '@stylexjs/stylex@0.19.1':
+    resolution: {integrity: sha512-JwNFm0MOYPqi+M4Ax5Un4ZxfZp4HEAX2sAWetZ88KALFcv1eEiHNJs75oO3V3U7RVWnzfkiM8i9eBowC3hqgUw==}
 
   '@swc/helpers@0.5.23':
     resolution: {integrity: sha512-5lSsMOTXURePglDfvuAQUqkGek9Hg2kksOYay2m0+XR++b2NWYL/4sWyuvVBIs8oKnJaxkdi9whaL/sqN13afw==}
@@ -1845,10 +1845,10 @@ packages:
 
 snapshots:
 
-  '@anuj20/void-ui@0.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@anuj20/void-ui@0.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@floating-ui/react': 0.26.28(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@stylexjs/stylex': 0.19.0
+      '@stylexjs/stylex': 0.19.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
@@ -2247,7 +2247,7 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@stylexjs/stylex@0.19.0':
+  '@stylexjs/stylex@0.19.1':
     dependencies:
       css-mediaquery: 0.1.2
       invariant: 2.2.4
