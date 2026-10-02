@@ -73,63 +73,76 @@ export function Tetris() {
       const piece = pieceRef.current;
       if (!piece) return;
 
-      if (e.key === "Escape") {
-        setActive(false);
-        return;
-      }
-      if (e.key === "ArrowLeft") {
-        if (
-          !collides(
-            gridRef.current,
-            piece.matrix,
-            piece.row,
-            piece.col - 1,
-            rows,
-            cols,
-          )
-        ) {
-          piece.col--;
-          render();
+      switch (e.key) {
+        case "Escape":
+          setActive(false);
+          break;
+        case "ArrowLeft":
+          if (
+            !collides(
+              gridRef.current,
+              piece.matrix,
+              piece.row,
+              piece.col - 1,
+              rows,
+              cols,
+            )
+          ) {
+            piece.col--;
+            render();
+          }
+          break;
+        case "ArrowRight":
+          if (
+            !collides(
+              gridRef.current,
+              piece.matrix,
+              piece.row,
+              piece.col + 1,
+              rows,
+              cols,
+            )
+          ) {
+            piece.col++;
+            render();
+          }
+          break;
+        case "ArrowDown":
+          tick();
+          break;
+        case "ArrowUp": {
+          const rotated = rotateMatrix(piece.matrix);
+          if (
+            !collides(
+              gridRef.current,
+              rotated,
+              piece.row,
+              piece.col,
+              rows,
+              cols,
+            )
+          ) {
+            piece.matrix = rotated;
+            render();
+          }
+          break;
         }
-      } else if (e.key === "ArrowRight") {
-        if (
-          !collides(
-            gridRef.current,
-            piece.matrix,
-            piece.row,
-            piece.col + 1,
-            rows,
-            cols,
-          )
-        ) {
-          piece.col++;
-          render();
-        }
-      } else if (e.key === "ArrowDown") {
-        tick();
-      } else if (e.key === "ArrowUp") {
-        const rotated = rotateMatrix(piece.matrix);
-        if (
-          !collides(gridRef.current, rotated, piece.row, piece.col, rows, cols)
-        ) {
-          piece.matrix = rotated;
-          render();
-        }
-      } else if (e.key === " ") {
-        e.preventDefault();
-        while (
-          !collides(
-            gridRef.current,
-            piece.matrix,
-            piece.row + 1,
-            piece.col,
-            rows,
-            cols,
-          )
-        ) {
-          piece.row++;
-        }
-        tick();
+        case " ":
+          e.preventDefault();
+          while (
+            !collides(
+              gridRef.current,
+              piece.matrix,
+              piece.row + 1,
+              piece.col,
+              rows,
+              cols,
+            )
+          ) {
+            piece.row++;
+          }
+          tick();
+          break;
       }
     };
 
