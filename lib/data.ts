@@ -45,9 +45,6 @@ export const skillGroups = [
   },
 ];
 
-export const summary =
-  "Full-stack developer with 1.5+ years shipping features end-to-end, from Go and gRPC APIs and PostgreSQL schemas to Vue and Svelte frontends. Comfortable with API design, schema design, and component-driven UI across fast-moving product teams.";
-
 export interface Job {
   company: string;
   role: string;

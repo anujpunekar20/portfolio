@@ -2,7 +2,7 @@
 
 import { Card } from "@anuj20/void-ui";
 import Image from "next/image";
-import { experience, summary } from "@/lib/data";
+import { experience } from "@/lib/data";
 import { SkillChip } from "../SkillChip/SkillChip";
 import sectionStyles from "../Section.module.css";
 import styles from "./Work.module.css";
@@ -12,7 +12,12 @@ export function Work() {
     <section id="work" className={sectionStyles.section}>
       <div className={sectionStyles.eyebrow}>02 / WORK</div>
       <h2 className={sectionStyles.heading}>Experience</h2>
-      <p className={styles.summary}>{summary}</p>
+      <p className={styles.summary}>
+        Full-stack developer with 1.5+ years shipping features end-to-end, from
+        Go and gRPC APIs and PostgreSQL schemas to Vue and Svelte frontends.
+        Comfortable with API design, schema design, and component-driven UI
+        across fast-moving product teams.
+      </p>
       <div className={styles.list}>
         {experience.map((job, i) => (
           <Card key={job.company}>
@@ -40,19 +45,21 @@ export function Work() {
                 </span>
               </summary>
               <div className={styles.body}>
-                {job.projects.map((p, pi) => (
-                  <div key={pi} className={styles.project}>
-                    {p.name && <h3 className={styles.projectName}>{p.name}</h3>}
+                {job.projects.map((project, projectIndex) => (
+                  <div key={projectIndex} className={styles.project}>
+                    {project.name && (
+                      <h3 className={styles.projectName}>{project.name}</h3>
+                    )}
                     <ul className={styles.bullets}>
-                      {p.bullets.map((b) => (
-                        <li key={b}>{b}</li>
+                      {project.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
                       ))}
                     </ul>
                   </div>
                 ))}
                 <div className={styles.stack}>
-                  {job.stack.map((s) => (
-                    <SkillChip key={s} name={s} />
+                  {job.stack.map((skill) => (
+                    <SkillChip key={skill} name={skill} />
                   ))}
                 </div>
               </div>

@@ -16,7 +16,7 @@ export function Nav() {
       <a
         href="#home"
         className={styles.logo}
-        onClick={(e) => scrollToSection(e, "home")}
+        onClick={(event) => scrollToSection(event, "home")}
       >
         AP_
       </a>
@@ -25,7 +25,7 @@ export function Nav() {
           <a
             key={link.id}
             href={`#${link.id}`}
-            onClick={(e) => scrollToSection(e, link.id)}
+            onClick={(event) => scrollToSection(event, link.id)}
           >
             {link.label}
           </a>
