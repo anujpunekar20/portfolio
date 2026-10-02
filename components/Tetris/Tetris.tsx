@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  BLOCK,
+  BLOCK_SIZE,
   collides,
   computeBlocks,
   createGrid,
@@ -21,7 +21,7 @@ export function Tetris() {
   const [active, setActive] = useState(false);
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [score, setScore] = useState(0);
-  const [dims, setDims] = useState({ rows: 0, cols: 0 });
+  const [boardSize, setBoardSize] = useState({ rows: 0, cols: 0 });
 
   const gridRef = useRef<Cell[][]>([]);
   const pieceRef = useRef<Piece | null>(null);
@@ -29,7 +29,7 @@ export function Tetris() {
   useEffect(() => {
     if (!active) return;
 
-    const { rows, cols } = dims;
+    const { rows, cols } = boardSize;
     gridRef.current = createGrid(rows, cols);
     pieceRef.current = spawnPiece(cols);
 
@@ -55,7 +55,8 @@ export function Tetris() {
       } else {
         const { grid, cleared } = lockPiece(gridRef.current, piece, cols);
         gridRef.current = grid;
-        if (cleared > 0) setScore((s) => s + cleared * 100);
+        if (cleared > 0)
+          setScore((previousScore) => previousScore + cleared * 100);
 
         const next = spawnPiece(cols);
         if (
@@ -69,11 +70,11 @@ export function Tetris() {
       render();
     };
 
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       const piece = pieceRef.current;
       if (!piece) return;
 
-      switch (e.key) {
+      switch (event.key) {
         case "Escape":
           setActive(false);
           break;
@@ -128,7 +129,7 @@ export function Tetris() {
           break;
         }
         case " ":
-          e.preventDefault();
+          event.preventDefault();
           while (
             !collides(
               gridRef.current,
@@ -156,26 +157,27 @@ export function Tetris() {
       pieceRef.current = null;
       setBlocks([]);
     };
-  }, [active, dims]);
+  }, [active, boardSize]);
 
   if (!active) {
-    const handlePlay = () => {
-      setDims({
-        cols: Math.floor(window.innerWidth / 2 / BLOCK),
-        rows: Math.floor(window.innerHeight / 2 / BLOCK),
-      });
-      setScore(0);
-      setActive(true);
-    };
-
     return (
-      <button className={styles.playButton} onClick={handlePlay}>
+      <button
+        className={styles.playButton}
+        onClick={() => {
+          setBoardSize({
+            cols: Math.floor(window.innerWidth / 2 / BLOCK_SIZE),
+            rows: Math.floor(window.innerHeight / 2 / BLOCK_SIZE),
+          });
+          setScore(0);
+          setActive(true);
+        }}
+      >
         ▶ PLAY
       </button>
     );
   }
 
-  const { rows, cols } = dims;
+  const { rows, cols } = boardSize;
 
   return (
     <>
@@ -188,7 +190,7 @@ export function Tetris() {
       </button>
       <div
         className={styles.board}
-        style={{ width: cols * BLOCK, height: rows * BLOCK }}
+        style={{ width: cols * BLOCK_SIZE, height: rows * BLOCK_SIZE }}
       >
         {blocks.map((block) => (
           <div key={block.key} style={block.style} />
