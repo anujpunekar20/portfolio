@@ -152,4 +152,10 @@ export const projects: Project[] = [
     image: "/screenshots/void-ui.png",
     live: "https://anujpunekar20.github.io/void-ui/",
   },
+  {
+    name: "Dubbit",
+    desc: "Video translation with lip-sync: a Flask API chaining Whisper (speech recognition), NLLB-200 (translation), Coqui TTS and Wav2Lip into one automated pipeline.",
+    tags: ["Python", "Flask", "Whisper", "Wav2Lip"],
+    github: "https://github.com/anujpunekar20/dubbit",
+  },
 ];

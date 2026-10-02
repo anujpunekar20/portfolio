@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Anuj Punekar — Portfolio",
   description:
     "Full-stack developer portfolio — work, projects, and a bit of Tetris.",
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

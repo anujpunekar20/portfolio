@@ -16,6 +16,10 @@
   margin-top: 0.5rem;
 }
 
+.games {
+  margin-top: 0.5rem;
+}
+
 .group {
   display: grid;
   grid-template-columns: 6rem 1fr;

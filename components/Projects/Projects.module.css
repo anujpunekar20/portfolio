@@ -20,18 +20,6 @@
   min-width: 0;
 }
 
-.imagePlaceholder {
-  width: 40%;
-  flex-shrink: 0;
-  aspect-ratio: 16 / 10;
-  border: 1px solid var(--void-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--void-text-disabled);
-  font-size: 0.875rem;
-}
-
 .image {
   width: 40%;
   flex-shrink: 0;
@@ -73,8 +61,7 @@
     flex-direction: column;
   }
 
-  .image,
-  .imagePlaceholder {
+  .image {
     width: 100%;
   }
 }
