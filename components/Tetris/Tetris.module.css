@@ -1,0 +1,62 @@
+.playButton {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 50;
+  background: var(--void-bg-elevated);
+  border: 1px solid var(--void-border-strong);
+  color: var(--void-text-primary);
+  font-family: var(--void-font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 1px;
+  padding: 0.75rem 1.125rem;
+  cursor: pointer;
+  box-shadow: var(--void-shadow);
+}
+
+.hud {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 101;
+  background: var(--void-bg-elevated);
+  border: 1px solid var(--void-border-strong);
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--void-text-muted);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+}
+
+.board {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 95;
+  isolation: isolate;
+  background: var(--void-bg-base);
+  border: 1px solid var(--void-border-strong);
+  box-shadow: var(--void-shadow);
+  overflow: hidden;
+}
+
+.exitButton {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 101;
+  background: var(--void-destructive);
+  border: 1px solid var(--void-border-strong);
+  color: var(--void-bg-base);
+  font-family: var(--void-font-mono);
+  font-size: 0.8125rem;
+  padding: 0.625rem 1rem;
+  cursor: pointer;
+}
