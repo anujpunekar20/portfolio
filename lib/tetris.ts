@@ -106,7 +106,9 @@ export function collides(
 // clockwise, without mutating `m`.
 export function rotateMatrix(m: Matrix): Matrix {
   // throw new Error("not implemented");
-  const transpose = Array.from({ length: m[0].length }, () => Array(m.length).fill(0));
+  const transpose = Array.from({ length: m[0].length }, () =>
+    Array(m.length).fill(0),
+  );
   for (let i = 0; i < m.length; i++) {
     for (let j = 0; j < m[i].length; j++) {
       transpose[j][i] = m[i][j];
