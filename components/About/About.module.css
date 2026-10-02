@@ -8,41 +8,7 @@
   margin-top: 0.5rem;
 }
 
-.groups {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  /* base gap (1rem) covers bio->groups' 16px; this delta brings it to 24px */
-  margin-top: 0.5rem;
-}
-
 .games {
+  /* base gap (1rem) covers bio->games' 16px; this delta brings it to 24px */
   margin-top: 0.5rem;
-}
-
-.group {
-  display: grid;
-  grid-template-columns: 6rem 1fr;
-  gap: 1rem;
-  align-items: baseline;
-}
-
-.groupLabel {
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--void-text-muted);
-  margin: 0;
-}
-
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-@media (max-width: 40rem) {
-  .group {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
 }

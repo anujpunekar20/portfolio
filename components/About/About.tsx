@@ -1,18 +1,17 @@
 "use client";
 
-import { skillGroups } from "@/lib/data";
-import { SkillChip } from "../SkillChip/SkillChip";
+import { ChipGroups } from "../ChipGroups/ChipGroups";
 import sectionStyles from "../Section.module.css";
 import styles from "./About.module.css";
 
 const games = [
   {
     label: "Playing",
-    titles: ["VALORANT", "Overwatch", "Rocket League", "Marvel Rivals"],
+    items: ["VALORANT", "Overwatch", "Rocket League", "Marvel Rivals"],
   },
   {
     label: "Favorites",
-    titles: [
+    items: [
       "Elden Ring",
       "Dishonored",
       "Celeste",
@@ -27,37 +26,15 @@ export function About() {
   return (
     <section id="about" className={sectionStyles.section}>
       <div className={sectionStyles.eyebrow}>01 / ABOUT</div>
-      <h2 className={sectionStyles.heading}>
-        Full-stack developer, systems-minded.
-      </h2>
+      <h2 className={sectionStyles.heading}>A gamer who builds things.</h2>
       <p className={styles.bio}>
-        I build backend services and frontend interfaces across whatever stack
-        the problem calls for — Go APIs, Svelte wizards, React libraries. Off
-        the clock: probably making a video game.
+        I&apos;m a big-time gamer, and it shows in how I build: I care about
+        fast feedback, tight controls, and details that feel good to use.
+        That&apos;s why there&apos;s a Tetris game hiding on this page — hit ▶
+        PLAY.
       </p>
-      <div className={styles.groups}>
-        {skillGroups.map((group) => (
-          <div key={group.label} className={styles.group}>
-            <h3 className={styles.groupLabel}>{group.label}</h3>
-            <div className={styles.skills}>
-              {group.skills.map((skill) => (
-                <SkillChip key={skill} name={skill} />
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className={`${styles.groups} ${styles.games}`}>
-        {games.map((group) => (
-          <div key={group.label} className={styles.group}>
-            <h3 className={styles.groupLabel}>{group.label}</h3>
-            <div className={styles.skills}>
-              {group.titles.map((title) => (
-                <SkillChip key={title} name={title} />
-              ))}
-            </div>
-          </div>
-        ))}
+      <div className={styles.games}>
+        <ChipGroups groups={games} />
       </div>
     </section>
   );

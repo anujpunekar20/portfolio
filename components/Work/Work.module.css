@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+.skills {
+  /* base gap (1rem) covers summary->skills' 16px; this delta brings it to 24px */
+  margin-top: 0.5rem;
+}
+
 .list {
   display: flex;
   flex-direction: column;
