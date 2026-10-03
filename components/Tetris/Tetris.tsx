@@ -21,7 +21,7 @@ const TICK_MS = 550;
 const HIGH_SCORE_KEY = "tetris-high-score";
 
 // On-screen buttons replay the matching key, so they share the keyboard's code path.
-const TOUCH_CONTROLS = [
+const touchControls = [
   { label: "←", key: "ArrowLeft", name: "Move left" },
   { label: "↻", key: "ArrowUp", name: "Rotate" },
   { label: "→", key: "ArrowRight", name: "Move right" },
@@ -213,7 +213,7 @@ export function Tetris() {
         <span>
           SCORE {score} · BEST {Math.max(score, highScore)}
         </span>
-        <span>
+        <span className={styles.keyHints}>
           ←→ move · ↑ rotate · ↓ soft drop · SPACE hard drop · ESC exit
         </span>
         {nextPiece && (
@@ -247,7 +247,7 @@ export function Tetris() {
         ))}
       </div>
       <div className={styles.touchControls}>
-        {TOUCH_CONTROLS.map((control) => (
+        {touchControls.map((control) => (
           <button
             key={control.name}
             aria-label={control.name}
