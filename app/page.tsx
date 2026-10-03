@@ -1,3 +1,4 @@
+import { Background } from "@/components/Background/Background";
 import { Nav } from "@/components/Nav/Nav";
 import { Hero } from "@/components/Hero/Hero";
 import { About } from "@/components/About/About";
@@ -12,6 +13,7 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <>
+      <Background />
       <Nav />
       <Tetris />
       <CommandPalette />
