@@ -7,6 +7,7 @@ import {
   collides,
   computeBlocks,
   createGrid,
+  dropRow,
   lockPiece,
   rotateMatrix,
   spawnPiece,
@@ -17,11 +18,23 @@ import {
 import styles from "./Tetris.module.css";
 
 const TICK_MS = 550;
+const HIGH_SCORE_KEY = "tetris-high-score";
+
+// On-screen buttons replay the matching key, so they share the keyboard's code path.
+const TOUCH_CONTROLS = [
+  { label: "←", key: "ArrowLeft", name: "Move left" },
+  { label: "↻", key: "ArrowUp", name: "Rotate" },
+  { label: "→", key: "ArrowRight", name: "Move right" },
+  { label: "↓", key: "ArrowDown", name: "Soft drop" },
+  { label: "⤓", key: " ", name: "Hard drop" },
+];
 
 export function Tetris() {
   const [active, setActive] = useState(false);
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [nextPiece, setNextPiece] = useState<Piece | null>(null);
   const [boardSize, setBoardSize] = useState({ rows: 0, cols: 0 });
 
   const gridRef = useRef<Cell[][]>([]);
@@ -33,6 +46,11 @@ export function Tetris() {
       rows: Math.floor(window.innerHeight / 2 / BLOCK_SIZE),
     });
     setScore(0);
+    try {
+      setHighScore(Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0);
+    } catch {
+      // storage blocked (private mode etc.): the best score just isn't remembered
+    }
     setActive(true);
   }, []);
 
@@ -47,9 +65,12 @@ export function Tetris() {
     const { rows, cols } = boardSize;
     gridRef.current = createGrid(rows, cols);
     pieceRef.current = spawnPiece(cols);
+    let upcomingPiece = spawnPiece(cols);
+    let currentScore = 0;
 
     const render = () => {
       setBlocks(computeBlocks(gridRef.current, pieceRef.current));
+      setNextPiece(upcomingPiece);
     };
 
     const tick = () => {
@@ -70,10 +91,18 @@ export function Tetris() {
       } else {
         const { grid, cleared } = lockPiece(gridRef.current, piece, cols);
         gridRef.current = grid;
-        if (cleared > 0)
-          setScore((previousScore) => previousScore + cleared * 100);
+        if (cleared > 0) {
+          currentScore += cleared * 100;
+          setScore(currentScore);
+          try {
+            if (currentScore > Number(localStorage.getItem(HIGH_SCORE_KEY)))
+              localStorage.setItem(HIGH_SCORE_KEY, String(currentScore));
+          } catch {
+            // storage blocked: keep playing without saving
+          }
+        }
 
-        const next = spawnPiece(cols);
+        const next = upcomingPiece;
         if (
           collides(gridRef.current, next.matrix, next.row, next.col, rows, cols)
         ) {
@@ -81,6 +110,7 @@ export function Tetris() {
           return;
         }
         pieceRef.current = next;
+        upcomingPiece = spawnPiece(cols);
       }
       render();
     };
@@ -148,18 +178,7 @@ export function Tetris() {
         }
         case " ":
           event.preventDefault();
-          while (
-            !collides(
-              gridRef.current,
-              piece.matrix,
-              piece.row + 1,
-              piece.col,
-              rows,
-              cols,
-            )
-          ) {
-            piece.row++;
-          }
+          piece.row = dropRow(gridRef.current, piece, rows, cols);
           tick();
           break;
       }
@@ -191,7 +210,30 @@ export function Tetris() {
     <>
       <div className={styles.backdrop} />
       <div className={styles.hud}>
-        SCORE {score} · ←→ move · ↑ rotate · ↓ drop · ESC exit
+        <span>
+          SCORE {score} · BEST {Math.max(score, highScore)}
+        </span>
+        <span>
+          ←→ move · ↑ rotate · ↓ soft drop · SPACE hard drop · ESC exit
+        </span>
+        {nextPiece && (
+          <div className={styles.nextPiece}>
+            NEXT
+            <div
+              className={styles.nextPieceGrid}
+              style={{
+                gridTemplateColumns: `repeat(${nextPiece.matrix[0].length}, 0.75rem)`,
+              }}
+            >
+              {nextPiece.matrix.flat().map((filled, i) => (
+                <div
+                  key={i}
+                  style={{ background: filled ? nextPiece.color : undefined }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <button className={styles.exitButton} onClick={() => setActive(false)}>
         EXIT
@@ -202,6 +244,21 @@ export function Tetris() {
       >
         {blocks.map((block) => (
           <div key={block.key} style={block.style} />
+        ))}
+      </div>
+      <div className={styles.touchControls}>
+        {TOUCH_CONTROLS.map((control) => (
+          <button
+            key={control.name}
+            aria-label={control.name}
+            onClick={() =>
+              window.dispatchEvent(
+                new KeyboardEvent("keydown", { key: control.key }),
+              )
+            }
+          >
+            {control.label}
+          </button>
         ))}
       </div>
     </>
