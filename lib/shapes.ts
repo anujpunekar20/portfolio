@@ -21,23 +21,22 @@ const TRIANGLE: Point[] = [
   { x: 0, y: -1 },
 ];
 
-// A plus sign whose arms are `armHalfWidth` thick on each side of the axis.
-function plusOutline(armHalfWidth: number): Point[] {
-  const w = armHalfWidth;
+// A plus sign whose arms are `halfWidth` thick on each side of the axis.
+function plusOutline(halfWidth: number): Point[] {
   return [
     { x: 0, y: -1 },
-    { x: w, y: -1 },
-    { x: w, y: -w },
-    { x: 1, y: -w },
-    { x: 1, y: w },
-    { x: w, y: w },
-    { x: w, y: 1 },
-    { x: -w, y: 1 },
-    { x: -w, y: w },
-    { x: -1, y: w },
-    { x: -1, y: -w },
-    { x: -w, y: -w },
-    { x: -w, y: -1 },
+    { x: halfWidth, y: -1 },
+    { x: halfWidth, y: -halfWidth },
+    { x: 1, y: -halfWidth },
+    { x: 1, y: halfWidth },
+    { x: halfWidth, y: halfWidth },
+    { x: halfWidth, y: 1 },
+    { x: -halfWidth, y: 1 },
+    { x: -halfWidth, y: halfWidth },
+    { x: -1, y: halfWidth },
+    { x: -1, y: -halfWidth },
+    { x: -halfWidth, y: -halfWidth },
+    { x: -halfWidth, y: -1 },
     { x: 0, y: -1 },
   ];
 }

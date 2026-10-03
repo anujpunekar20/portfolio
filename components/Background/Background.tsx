@@ -27,12 +27,15 @@ export function Background() {
       .getPropertyValue("--void-accent")
       .trim();
     if (particlesRef.current.length === 0) {
-      const particleCount = innerWidth < 768 ? 250 : 500;
-      particlesRef.current = Array.from({ length: particleCount }, () => ({
-        x: Math.random() * innerWidth,
-        y: Math.random() * innerHeight,
-        ease: 0.02 + Math.random() * 0.04,
-      }));
+      // Fewer particles on narrow (mostly mobile) screens.
+      particlesRef.current = Array.from(
+        { length: innerWidth < 768 ? 250 : 500 },
+        () => ({
+          x: Math.random() * innerWidth,
+          y: Math.random() * innerHeight,
+          ease: 0.02 + Math.random() * 0.04,
+        }),
+      );
     }
     const particles = particlesRef.current;
     const shape = SECTION_SHAPES[activeSection](particles.length);
@@ -67,6 +70,8 @@ export function Background() {
     }
 
     // ponytail: no visibilitychange handling, browsers already pause rAF in hidden tabs.
+    // ponytail: fixed step per frame, so 120Hz screens spin and ease twice as fast;
+    // scale by the rAF timestamp delta if that ever looks off.
     function animate() {
       angleRef.current += 0.002;
       draw();
