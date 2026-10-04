@@ -7,6 +7,9 @@
   justify-content: space-between;
   padding: 1rem 3rem;
   border-bottom: 1px solid var(--void-border);
+  /* paints the bottom rule 1rem past each side, out to the outer rails */
+  border-image: linear-gradient(var(--void-border), var(--void-border)) 0 0 1 /
+    0 0 1px / 0 1rem;
   background: rgba(10, 10, 10, 0.9);
 }
 
