@@ -18,13 +18,35 @@
 
 /* Gaps every 0.75rem cut the fill into blocks, like a game's XP meter. */
 .fill {
+  position: relative;
   height: 100%;
-  background: repeating-linear-gradient(
+  background: var(--void-accent);
+  mask-image: repeating-linear-gradient(
     to right,
-    var(--void-accent) 0 0.625rem,
+    #000 0 0.625rem,
     transparent 0.625rem 0.75rem
   );
   transition: width 150ms ease-out;
+}
+
+/* Max level: a gradient fades in over the accent (gradients can't transition). */
+.fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--void-accent), #ff6ec7, #ffd166);
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
+.maxed .fill::after {
+  opacity: 1;
+}
+
+.maxed .levelNumber {
+  background: linear-gradient(to right, #ff6ec7, #ffd166);
+  background-clip: text;
+  color: transparent;
 }
 
 .level {
@@ -40,7 +62,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fill {
+  .fill,
+  .fill::after {
     transition: none;
   }
 }
