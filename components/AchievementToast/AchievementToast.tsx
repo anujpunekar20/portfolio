@@ -6,7 +6,7 @@ import {
   unlockAchievement,
   type AchievementId,
 } from "@/lib/achievements";
-import { ACHIEVEMENT_UNLOCKED_EVENT, PLAY_TETRIS_EVENT } from "@/lib/events";
+import { ACHIEVEMENT_UNLOCKED_EVENT } from "@/lib/events";
 import styles from "./AchievementToast.module.css";
 
 const KONAMI_CODE = [
@@ -45,7 +45,6 @@ export function AchievementToast() {
       if (konamiProgress === KONAMI_CODE.length) {
         konamiProgress = 0;
         unlockAchievement("cheat-code");
-        window.dispatchEvent(new Event(PLAY_TETRIS_EVENT));
       }
     };
 
