@@ -24,18 +24,27 @@
   object-position: 50% 20%;
   border: 1px solid var(--void-border);
   box-shadow: 4px 4px 0 0 var(--void-accent);
+  animation:
+    powerOn 180ms steps(3) 480ms both,
+    lightOn 120ms steps(2) 700ms both;
 }
 
+/* Power-on sequence: the eyebrow types out, the copy lights up in steps,
+   then the portrait's violet shadow switches on last. */
 .eyebrow {
+  width: fit-content;
   font-size: 0.875rem;
   color: var(--void-accent);
   letter-spacing: 0.125rem;
+  /* one step per character of "// PORTFOLIO"; monospace makes each step land on a glyph */
+  animation: typeOn 360ms steps(12) 100ms both;
 }
 
 .heading {
   font-size: 3.5rem;
   line-height: 1.1;
   font-weight: 700;
+  animation: powerOn 180ms steps(3) 440ms both;
 }
 
 .tagline {
@@ -45,6 +54,7 @@
   max-width: 40rem;
   /* base gap (1rem) covers heading->tagline's 16px; this delta brings it to the spec's 20px */
   margin-top: 0.25rem;
+  animation: powerOn 180ms steps(3) 500ms both;
 }
 
 .actions {
@@ -53,6 +63,35 @@
   flex-wrap: wrap;
   /* base gap (1rem) covers tagline->actions' 16px; this delta brings it to the spec's 36px */
   margin-top: 1.25rem;
+  animation: powerOn 180ms steps(3) 560ms both;
+}
+
+@keyframes typeOn {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes powerOn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes lightOn {
+  from {
+    box-shadow: 0 0 0 0 var(--void-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow,
+  .heading,
+  .tagline,
+  .actions,
+  .photo {
+    animation: none;
+  }
 }
 
 @media (max-width: 48rem) {

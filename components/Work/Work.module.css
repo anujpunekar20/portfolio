@@ -19,6 +19,28 @@
   margin-top: 0.5rem;
 }
 
+/* Opening a quest slides its objectives open instead of popping them in.
+   interpolate-size lets block-size transition to `auto`; browsers without
+   ::details-content support just toggle instantly. */
+.job {
+  interpolate-size: allow-keywords;
+}
+
+.job::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 160ms ease-in,
+    content-visibility 160ms allow-discrete;
+}
+
+/* opening is slower than closing, so it reads as the content arriving */
+.job[open]::details-content {
+  block-size: auto;
+  transition-duration: 260ms;
+  transition-timing-function: var(--void-ease-out);
+}
+
 .summaryRow {
   display: flex;
   align-items: flex-start;
@@ -165,5 +187,11 @@
 @media (max-width: 40rem) {
   .body {
     padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job::details-content {
+    transition: none;
   }
 }
