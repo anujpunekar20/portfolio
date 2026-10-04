@@ -1,0 +1,50 @@
+.region {
+  position: fixed;
+  left: 1.75rem;
+  bottom: 1.75rem;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 15rem;
+  padding: 0.75rem 1rem;
+  background: var(--void-bg-elevated);
+  border: 1px solid var(--void-accent);
+  box-shadow: 4px 4px 0 0 var(--void-accent);
+  /* steps() makes the entrance snap in like a console notification, not glide */
+  animation: slideIn 240ms steps(4) both;
+}
+
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.0625rem;
+  color: var(--void-accent);
+}
+
+.title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--void-text-primary);
+}
+
+.description {
+  font-size: 0.8125rem;
+  color: var(--void-text-muted);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}
