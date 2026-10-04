@@ -101,6 +101,18 @@ export function collides(
   return false;
 }
 
+// The lowest row the piece can fall to from where it is now.
+export function dropRow(
+  grid: Cell[][],
+  piece: Piece,
+  rows: number,
+  cols: number,
+): number {
+  let row = piece.row;
+  while (!collides(grid, piece.matrix, row + 1, piece.col, rows, cols)) row++;
+  return row;
+}
+
 export function rotateMatrix(matrix: Matrix): Matrix {
   const transpose = Array.from({ length: matrix[0].length }, () =>
     Array(matrix.length).fill(0),
@@ -167,11 +179,27 @@ export function computeBlocks(grid: Cell[][], piece: Piece | null): Block[] {
   }
 
   if (piece) {
+    const ghostRow = dropRow(grid, piece, grid.length, grid[0].length);
     for (let r = 0; r < piece.matrix.length; r++) {
       for (let c = 0; c < piece.matrix[r].length; c++) {
         if (!piece.matrix[r][c]) continue;
         const gridRow = piece.row + r;
         const gridCol = piece.col + c;
+        // Outline of where a hard drop would land; the piece draws over it once they meet.
+        blocks.push({
+          key: `ghost${ghostRow + r}-${gridCol}`,
+          style: {
+            position: "absolute",
+            left: gridCol * BLOCK_SIZE,
+            top: (ghostRow + r) * BLOCK_SIZE,
+            width: innerSize,
+            height: innerSize,
+            background: "transparent",
+            border: `1px dashed ${piece.color}`,
+            zIndex: 98,
+            boxSizing: "border-box",
+          },
+        });
         blocks.push({
           key: `p${gridRow}-${gridCol}`,
           style: {
