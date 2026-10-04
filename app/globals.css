@@ -19,6 +19,11 @@ body {
   font-family: var(--void-font-mono), Arial, Helvetica, sans-serif;
 }
 
+/* Paragraphs read in a quieter mono; headings, labels and UI keep Kode Mono. */
+p {
+  font-family: var(--font-body), var(--void-font-mono), monospace;
+}
+
 a {
   color: var(--void-accent);
   text-decoration: none;

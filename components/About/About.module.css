@@ -1,7 +1,7 @@
 .bio {
   font-size: 1rem;
   color: var(--void-text-muted);
-  line-height: 1.7;
+  line-height: 1.8;
   max-width: 42.5rem;
   margin: 0;
   /* base gap (1rem) covers heading->bio's 16px; this delta brings it to the spec's 24px */
