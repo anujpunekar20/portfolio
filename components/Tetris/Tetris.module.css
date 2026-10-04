@@ -52,7 +52,7 @@
   isolation: isolate;
   background: var(--void-bg-base);
   border: 1px solid var(--void-border-strong);
-  box-shadow: var(--void-shadow);
+  box-shadow: 3px 3px 0 0 var(--void-shadow);
   overflow: hidden;
 }
 
@@ -100,8 +100,13 @@
   color: var(--void-text-primary);
   font-family: var(--void-font-mono);
   font-size: 1.25rem;
-  box-shadow: var(--void-shadow);
+  box-shadow: 3px 3px 0 0 var(--void-shadow);
   touch-action: manipulation;
+}
+
+.touchControls button:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
 }
 
 @media (pointer: fine) {
