@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { unlockAchievement } from "@/lib/achievements";
 import { PLAY_TETRIS_EVENT } from "@/lib/events";
 import {
   BLOCK_SIZE,
@@ -100,6 +101,7 @@ export function Tetris() {
           } catch {
             // storage blocked: keep playing without saving
           }
+          unlockAchievement("line-clear");
         }
 
         const next = upcomingPiece;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { unlockAchievement } from "@/lib/achievements";
 import { OPEN_COMMAND_PALETTE_EVENT, PLAY_TETRIS_EVENT } from "@/lib/events";
 import { scrollToId } from "@/lib/scroll";
 import styles from "./CommandPalette.module.css";
@@ -107,6 +108,8 @@ export function CommandPalette() {
       ref={dialogRef}
       className={styles.dialog}
       aria-label="Command palette"
+      // On close rather than open: the modal's backdrop would cover the toast.
+      onClose={() => unlockAchievement("power-user")}
       onClick={(event) => {
         // clicks on the ::backdrop land on the dialog element itself
         if (event.target === dialogRef.current) dialogRef.current?.close();

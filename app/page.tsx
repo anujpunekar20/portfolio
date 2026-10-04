@@ -8,6 +8,7 @@ import { Contact } from "@/components/Contact/Contact";
 import { Footer } from "@/components/Footer/Footer";
 import { CommandPalette } from "@/components/CommandPalette/CommandPalette";
 import { Tetris } from "@/components/Tetris/Tetris";
+import { AchievementToast } from "@/components/AchievementToast/AchievementToast";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <XpBar />
       <Tetris />
       <CommandPalette />
+      <AchievementToast />
       <div className={styles.scrollArea}>
         <Hero />
         <About />
