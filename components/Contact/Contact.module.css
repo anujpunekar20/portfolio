@@ -14,3 +14,36 @@
   /* base gap (1rem) covers intro->actions' 16px; this delta brings it to the spec's 32px */
   margin-top: 1rem;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 37.5rem;
+  /* base gap (1rem) + this delta = 32px between the icon row and the form */
+  margin-top: 1rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+}
+
+.submitRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.status {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--void-text-muted);
+}
