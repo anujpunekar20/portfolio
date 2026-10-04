@@ -1,0 +1,46 @@
+.xpBar {
+  width: 100%;
+  max-width: 56.25rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 3rem;
+  border-bottom: 1px solid var(--void-border);
+}
+
+.track {
+  flex: 1;
+  height: 0.75rem;
+  padding: 1px;
+  border: 1px solid var(--void-border);
+}
+
+/* Gaps every 0.75rem cut the fill into blocks, like a game's XP meter. */
+.fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    var(--void-accent) 0 0.625rem,
+    transparent 0.625rem 0.75rem
+  );
+  transition: width 150ms ease-out;
+}
+
+.level {
+  min-width: 7.5rem;
+  text-align: right;
+  font-size: 0.75rem;
+  letter-spacing: 0.0625rem;
+  color: var(--void-text-muted);
+}
+
+.levelNumber {
+  color: var(--void-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill {
+    transition: none;
+  }
+}
