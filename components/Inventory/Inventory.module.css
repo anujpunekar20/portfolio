@@ -44,6 +44,9 @@
 }
 
 .slot:hover {
+  /* lift above the neighbour that overlaps this slot's right/bottom edge */
+  position: relative;
+  z-index: 1;
   color: var(--void-accent);
   outline: 1px solid var(--void-accent);
   outline-offset: -1px;
