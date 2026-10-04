@@ -1,0 +1,24 @@
+# Vercel's preview build already covers `next build` and type errors;
+# this adds what it skips (format, lint, self-checks).
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm exec tsc --noEmit
+      - run: node lib/tetris.check.ts
