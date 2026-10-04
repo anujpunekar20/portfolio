@@ -38,7 +38,16 @@ export function Work() {
                 )}
                 <div className={styles.head}>
                   <div className={styles.row}>
-                    <span className={styles.company}>{job.company}</span>
+                    <span className={styles.company}>
+                      {job.company}
+                      {job.dates.endsWith("Present") ? (
+                        <span className={`${styles.status} ${styles.active}`}>
+                          In progress
+                        </span>
+                      ) : (
+                        <span className={styles.status}>Complete</span>
+                      )}
+                    </span>
                     <span className={styles.dates}>{job.dates}</span>
                   </div>
                   <div className={styles.role}>{job.role}</div>

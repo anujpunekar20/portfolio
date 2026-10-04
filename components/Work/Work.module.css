@@ -61,8 +61,26 @@
 }
 
 .company {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   font-size: 1.125rem;
   font-weight: 700;
+}
+
+/* Quest status: the current role is in progress, past ones are complete. */
+.status {
+  font-size: 0.75rem;
+  font-weight: 400;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--void-border);
+  color: var(--void-text-muted);
+}
+
+.active {
+  border-color: var(--void-accent);
+  color: var(--void-accent);
 }
 
 .dates {
@@ -113,13 +131,29 @@
 
 .bullets {
   margin: 0;
-  padding-left: 1.25rem;
+  padding: 0;
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
   font-size: 0.875rem;
   line-height: 1.6;
   color: var(--void-text-muted);
+}
+
+/* Each bullet reads as a completed quest objective. */
+.bullets li {
+  display: grid;
+  grid-template-columns: 0.625rem 1fr;
+  gap: 0.625rem;
+}
+
+.bullets li::before {
+  content: "■";
+  font-size: 0.625rem;
+  /* matches the bullet text line (0.875rem × 1.6) so the square centers on the first line */
+  line-height: 2.24;
+  color: var(--void-accent);
 }
 
 .stack {
