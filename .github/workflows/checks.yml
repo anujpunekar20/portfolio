@@ -20,5 +20,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
       - run: pnpm lint
+      # Generates .next/types (e.g. the global LayoutProps) that tsc needs on a clean checkout
+      - run: pnpm exec next typegen
       - run: pnpm exec tsc --noEmit
       - run: node lib/tetris.check.ts
