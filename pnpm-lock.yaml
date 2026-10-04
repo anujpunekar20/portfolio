@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@anuj20/void-ui':
-        specifier: ^0.1.2
-        version: 0.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^0.2.0
+        version: 0.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@vercel/analytics':
         specifier: ^2.0.1
         version: 2.0.1(next@16.3.4(@babel/core@7.29.7)(@types/node@20.19.43)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
@@ -54,8 +54,8 @@ importers:
 
 packages:
 
-  '@anuj20/void-ui@0.1.2':
-    resolution: {integrity: sha512-ySP1xrcqV8PLZjJCMl4Wp4+LdkeJiDJUjn+fvMYSpzwEcNQFp3raSrsRjhHEysUaHWGo9NUjg1Z0TxabGffE8g==}
+  '@anuj20/void-ui@0.2.0':
+    resolution: {integrity: sha512-RFaJcW44ajnzdAfPhHQjOpcgqBG1wFvV8A5RV17/mYByNhZserDBso8Qkz6V1GXIq6twFWWjqk6lEWh6ykfswg==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
@@ -1885,7 +1885,7 @@ packages:
 
 snapshots:
 
-  '@anuj20/void-ui@0.1.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@anuj20/void-ui@0.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@floating-ui/react': 0.26.28(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@stylexjs/stylex': 0.19.1

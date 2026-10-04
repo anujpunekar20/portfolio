@@ -16,19 +16,21 @@ export function Hero() {
           Your go-to full-stack dev with a knack for video games.
         </p>
         <div className={styles.actions}>
-          <a
+          <Button
             href="#projects"
             onClick={(event) => scrollToSection(event, "projects")}
+            variant="solid"
+            size="lg"
           >
-            <Button variant="solid" size="lg">
-              View Projects
-            </Button>
-          </a>
-          <a href="mailto:anujkakarot@gmail.com">
-            <Button variant="outline" size="lg">
-              Get In Touch
-            </Button>
-          </a>
+            View Projects
+          </Button>
+          <Button
+            href="mailto:anujkakarot@gmail.com"
+            variant="outline"
+            size="lg"
+          >
+            Get In Touch
+          </Button>
         </div>
       </div>
 
