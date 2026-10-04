@@ -2,8 +2,8 @@
 
 import { Card } from "@anuj20/void-ui";
 import Image from "next/image";
-import { experience, skillGroups } from "@/lib/data";
-import { ChipGroups } from "../ChipGroups/ChipGroups";
+import { experience } from "@/lib/data";
+import { Inventory } from "../Inventory/Inventory";
 import { SkillChip } from "../SkillChip/SkillChip";
 import sectionStyles from "../Section.module.css";
 import styles from "./Work.module.css";
@@ -20,7 +20,7 @@ export function Work() {
         across fast-moving product teams.
       </p>
       <div className={styles.skills}>
-        <ChipGroups groups={skillGroups} />
+        <Inventory />
       </div>
       <div className={styles.list}>
         {experience.map((job, i) => (
