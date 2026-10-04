@@ -24,9 +24,16 @@
   font-size: 0.8125rem;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--void-border);
   transition:
     color 150ms ease-out,
     border-color 150ms ease-out;
+}
+
+/* Sinks into its shadow when pressed, like a physical controller button. */
+.paletteButton:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
 }
 
 .paletteButton:hover {

@@ -1,4 +1,5 @@
 import { Nav } from "@/components/Nav/Nav";
+import { XpBar } from "@/components/XpBar/XpBar";
 import { Hero } from "@/components/Hero/Hero";
 import { About } from "@/components/About/About";
 import { Work } from "@/components/Work/Work";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <Nav />
+      <XpBar />
       <Tetris />
       <CommandPalette />
       <div className={styles.scrollArea}>

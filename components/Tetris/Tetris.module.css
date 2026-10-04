@@ -11,7 +11,13 @@
   letter-spacing: 1px;
   padding: 0.75rem 1.125rem;
   cursor: pointer;
-  box-shadow: var(--void-shadow);
+  box-shadow: 3px 3px 0 0 var(--void-shadow);
+}
+
+/* Sinks into its shadow when pressed, like a physical controller button. */
+.playButton:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
 }
 
 .hud {
