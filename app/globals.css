@@ -28,9 +28,11 @@ body {
   font-family: var(--void-font-mono), Arial, Helvetica, sans-serif;
 }
 
-/* Double rails framing the 900px column, with a hatched 1rem gutter
-   between each pair. Fixed, so nav, XP bar and content all sit inside them. */
-body::before {
+/* Double rails with a hatched 1rem gutter between each pair: ::before frames
+   the 900px column, ::after frames the screen near its edges. Fixed, so nav,
+   XP bar and content all sit inside them. */
+body::before,
+body::after {
   content: "";
   position: fixed;
   inset-block: 0;
@@ -47,6 +49,18 @@ body::before {
     var(--rail-hatch) left / 1rem 100% no-repeat,
     var(--rail-hatch) right / 1rem 100% no-repeat;
   pointer-events: none;
+}
+
+body::after {
+  display: none;
+  width: min(100% - 4rem, 100rem);
+}
+
+/* Only once there's room for the outer pair to stand clear of the column's. */
+@media (min-width: 64rem) {
+  body::after {
+    display: block;
+  }
 }
 
 a {
