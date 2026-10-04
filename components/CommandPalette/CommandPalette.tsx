@@ -33,6 +33,11 @@ const commands = [
     },
   },
   {
+    label: "Book a call",
+    run: () =>
+      window.open("https://cal.com/anuj-punekar", "_blank", "noopener"),
+  },
+  {
     label: "Play Tetris",
     run: () => window.dispatchEvent(new Event(PLAY_TETRIS_EVENT)),
   },
