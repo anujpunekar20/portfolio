@@ -5,14 +5,14 @@ const UNLOCKED_KEY = "achievements";
 export const achievements = {
   "power-user": {
     title: "Power user",
-    description: "Opened the command palette",
+    description: "Used the hacks!",
   },
   completionist: {
     title: "Completionist",
-    description: "Reached the end of the page",
+    description: "Reached the end of the page :)",
   },
   "line-clear": { title: "Line clear", description: "Cleared a row in Tetris" },
-  "cheat-code": { title: "Cheat code", description: "Entered the Konami code" },
+  "cheat-code": { title: "Cheat code", description: "Hey, you know this?" },
 };
 
 export type AchievementId = keyof typeof achievements;
