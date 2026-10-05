@@ -55,6 +55,50 @@
   /* base gap (1rem) covers heading->tagline's 16px; this delta brings it to the spec's 20px */
   margin-top: 0.25rem;
   animation: powerOn 180ms steps(3) 500ms both;
+  /* the typed line sits on an invisible copy of the longest tagline, so the height never changes */
+  display: grid;
+  cursor: default;
+}
+
+.reserve,
+.typed {
+  grid-area: 1 / 1;
+}
+
+.reserve {
+  visibility: hidden;
+}
+
+/* the same underscore cursor as the AP_ logo */
+.cursor {
+  color: var(--void-accent);
+}
+
+/* blinks like a terminal once a line is typed, then stops solid after 5s (WCAG 2.2.2) */
+.blinking {
+  animation: blink 1s steps(1) 5;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* full line for screen readers; the typed copy is aria-hidden so it isn't read letter by letter */
+.screenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blinking {
+    animation: none;
+  }
 }
 
 .actions {
