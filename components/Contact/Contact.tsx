@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { unlockAchievement } from "@/lib/achievements";
 import { Button, Input, Textarea, Tooltip } from "@anuj20/void-ui";
 import { LuCalendar } from "react-icons/lu";
 import { GithubIcon, LinkedinIcon, MailIcon } from "../Icons";
@@ -28,6 +29,7 @@ export function Contact() {
     if (response?.ok) {
       form.reset();
       setStatus("sent");
+      unlockAchievement("party-up");
       return;
     }
     const body = await response?.json().catch(() => null);
@@ -125,9 +127,13 @@ export function Contact() {
           <Button type="submit" disabled={status === "sending"}>
             {status === "sending" ? "Sending…" : "Send message"}
           </Button>
+          {/* the live region stays mounted (remounting it can skip the
+              announcement); only the inner span is re-keyed to retype */}
           <p role="status" className={styles.status}>
-            {status === "sent" && "Sent. I'll get back to you soon."}
-            {status === "error" && errorMessage}
+            <span key={status} className={styles.statusText}>
+              {status === "sent" && "Sent. I'll get back to you soon."}
+              {status === "error" && errorMessage}
+            </span>
           </p>
         </div>
       </form>

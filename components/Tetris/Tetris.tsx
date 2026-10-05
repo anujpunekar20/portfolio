@@ -213,7 +213,11 @@ export function Tetris() {
       <div className={styles.backdrop} />
       <div className={styles.hud}>
         <span>
-          SCORE {score} · BEST {Math.max(score, highScore)}
+          SCORE{" "}
+          <span key={score} className={score > 0 ? styles.scoreUp : ""}>
+            {score}
+          </span>{" "}
+          · BEST {Math.max(score, highScore)}
         </span>
         <span className={styles.keyHints}>
           ←→ move · ↑ rotate · ↓ soft drop · SPACE hard drop · ESC exit

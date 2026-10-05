@@ -15,14 +15,34 @@
   background: var(--void-bg-elevated);
   border: 1px solid var(--void-accent);
   box-shadow: 4px 4px 0 0 var(--void-accent);
-  /* steps() makes the entrance snap in like a console notification, not glide */
-  animation: slideIn 240ms steps(4) both;
+  position: relative;
+  /* Unlock sequence, in steps like console hardware: the frame wipes in, the
+     label types out, the violet shadow switches on last, then it drops away
+     as the 4s dismiss timer (in the component) runs out. */
+  animation:
+    wipeIn 200ms steps(4) backwards,
+    lightOn 120ms steps(2) 420ms both,
+    dropOut 200ms steps(3) 3800ms forwards;
+}
+
+/* the 4s dismiss timer, drawn as a bar that drains toward the left */
+.toast::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--void-accent);
+  transform-origin: left;
+  animation: drain 4000ms linear both;
 }
 
 .label {
   font-size: 0.75rem;
   letter-spacing: 0.0625rem;
   color: var(--void-accent);
+  width: fit-content;
+  /* one step per glyph of "◆ Trophy unlocked" */
+  animation: wipeIn 220ms steps(17) 200ms backwards;
 }
 
 .title {
@@ -36,15 +56,62 @@
   color: var(--void-text-muted);
 }
 
-@keyframes slideIn {
+/* Used for both the frame and the label. Both ends are inset() so it can
+   interpolate (inset to none can't); fill is backwards-only, so once it ends
+   the clip is gone and doesn't cut off the offset shadow. */
+@keyframes wipeIn {
   from {
-    transform: translateY(1rem);
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@keyframes lightOn {
+  from {
+    box-shadow: 0 0 0 0 var(--void-accent);
+  }
+}
+
+@keyframes dropOut {
+  to {
+    transform: translateY(0.5rem);
     opacity: 0;
   }
 }
 
+@keyframes drain {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+/* no movement: the toast just fades in and out */
 @media (prefers-reduced-motion: reduce) {
   .toast {
+    animation:
+      fadeIn 200ms both,
+      fadeOut 200ms 3800ms forwards;
+  }
+
+  .label {
     animation: none;
+  }
+
+  .toast::after {
+    display: none;
   }
 }

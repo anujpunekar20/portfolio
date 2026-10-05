@@ -63,9 +63,26 @@
   color: var(--void-accent);
 }
 
+/* A new level lights the readout in inverse video for one beat. */
+.levelUp {
+  animation: levelUp 240ms steps(1);
+}
+
+@keyframes levelUp {
+  from {
+    color: var(--void-bg-base);
+    background: var(--void-accent);
+    box-shadow: 0 0 0 2px var(--void-accent);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fill,
   .fill::after {
     transition: none;
+  }
+
+  .levelUp {
+    animation: none;
   }
 }

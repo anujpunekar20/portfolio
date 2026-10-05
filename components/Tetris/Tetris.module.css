@@ -34,6 +34,13 @@
   z-index: 90;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(6px);
+  transition: opacity var(--void-duration-base) var(--void-ease-out);
+}
+
+@starting-style {
+  .backdrop {
+    opacity: 0;
+  }
 }
 
 .board {
@@ -47,6 +54,36 @@
   border: 1px solid var(--void-border-strong);
   box-shadow: 3px 3px 0 0 var(--void-shadow);
   overflow: hidden;
+  /* rises out of the plate when the game opens, like the command palette */
+  transition:
+    opacity var(--void-duration-base) var(--void-ease-out),
+    translate var(--void-duration-base) var(--void-ease-out),
+    box-shadow var(--void-duration-base) var(--void-ease-out);
+}
+
+@starting-style {
+  .board {
+    opacity: 0;
+    translate: 3px 3px;
+    box-shadow: none;
+  }
+}
+
+/* each new score flashes violet for a beat */
+.scoreUp {
+  animation: scoreUp 240ms steps(1);
+}
+
+@keyframes scoreUp {
+  from {
+    color: var(--void-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scoreUp {
+    animation: none;
+  }
 }
 
 .exitButton {
