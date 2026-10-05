@@ -7,15 +7,16 @@
 }
 
 .skills {
-  /* base gap (1rem) covers summary->skills' 16px; this delta brings it to 24px */
-  margin-top: 0.5rem;
+  /* base gap (1rem) covers list->skills' 16px; this delta brings it to 40px */
+  margin-top: 1.5rem;
 }
 
+/* One ruled ledger: hairlines between entries instead of a card per job. */
 .list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  /* base gap (1rem) on the section covers heading->list's 16px; this delta brings it to 24px */
+  border-bottom: 1px solid var(--void-border);
+  /* base gap (1rem) on the section covers summary->list's 16px; this delta brings it to 24px */
   margin-top: 0.5rem;
 }
 
@@ -23,6 +24,10 @@
    interpolate-size lets block-size transition to `auto`; browsers without
    ::details-content support just toggle instantly. */
 .job {
+  padding: 1.25rem 1rem;
+  border-top: 1px solid var(--void-border);
+  /* same 2px bar the command palette uses for its selected row */
+  border-left: 2px solid transparent;
   interpolate-size: allow-keywords;
 }
 
@@ -41,9 +46,15 @@
   transition-timing-function: var(--void-ease-out);
 }
 
+.current {
+  border-left-color: var(--void-accent);
+}
+
 .summaryRow {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  /* date gutter | logo | text | chevron */
+  grid-template-columns: 5rem 2.5rem 1fr auto;
+  align-items: start;
   gap: 0.75rem;
   cursor: pointer;
   list-style: none;
@@ -56,6 +67,10 @@
 .summaryRow:focus-visible {
   outline: 2px solid var(--void-accent);
   outline-offset: 0.25rem;
+}
+
+.summaryRow:hover .chevron {
+  color: var(--void-accent);
 }
 
 .logo {
@@ -72,14 +87,6 @@
   flex-direction: column;
   gap: 0.25rem;
   min-width: 0;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.5rem;
 }
 
 .company {
@@ -105,8 +112,12 @@
   color: var(--void-accent);
 }
 
+/* start and end date stacked, so the gutter reads as a timeline */
 .dates {
+  display: flex;
+  flex-direction: column;
   font-size: 0.8125rem;
+  line-height: 1.6;
   color: var(--void-text-muted);
 }
 
@@ -135,8 +146,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* inset to line up with the text column past the 40px logo + 12px gap */
-  padding: 1rem 0 0 3.25rem;
+  /* inset to line up with the text column: 5rem dates + 2.5rem logo + two 0.75rem gaps */
+  padding: 1rem 0 0 9rem;
 }
 
 .project {
@@ -185,6 +196,21 @@
 }
 
 @media (max-width: 40rem) {
+  /* the date gutter becomes one line above the logo row, so dates still lead */
+  .summaryRow {
+    grid-template-columns: 2.5rem 1fr auto;
+  }
+
+  .dates {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .dates span + span::before {
+    content: "— ";
+  }
+
   .body {
     padding-left: 0;
   }
