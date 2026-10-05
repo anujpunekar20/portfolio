@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@anuj20/void-ui";
 import Image from "next/image";
 import { scrollToSection } from "@/lib/scroll";
 import styles from "./Hero.module.css";
 
-// The first line renders on load (and for crawlers); the rest appear on roll.
+// The first line types out on load (and is what crawlers see); the rest appear on roll.
 const taglines = [
   "Full-stack dev who owns the backend: Go and gRPC APIs in production.",
   "Your go-to full-stack dev with a knack for video games.",
@@ -17,6 +17,11 @@ const taglines = [
   "Ships end to end, then sweats the details.",
 ];
 
+// Reserves the tagline's height, so typing never pushes the buttons down.
+const longestTagline = taglines.reduce((longest, line) =>
+  line.length > longest.length ? line : longest,
+);
+
 // Index of the tagline to roll in next, given the one currently showing.
 function pickNextTagline(currentIndex: number, count: number): number {
   // draw from one slot fewer than count, then skip over the current line's slot
@@ -26,13 +31,43 @@ function pickNextTagline(currentIndex: number, count: number): number {
 
 export function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  // the line rolling out; null when no roll is in progress
-  const [outgoingIndex, setOutgoingIndex] = useState<number | null>(null);
+  // the line queued to type once the current one is backspaced; null when not rolling
+  const [nextIndex, setNextIndex] = useState<number | null>(null);
+  const [typedLength, setTypedLength] = useState(0);
+  const line = taglines[currentIndex];
+
+  // One character per tick: backspace fast, then type. Reduced motion jumps straight to the end.
+  useEffect(() => {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    let step: () => void;
+    let delay: number;
+    if (nextIndex !== null) {
+      delay = 12;
+      step =
+        typedLength > 0 && !reducedMotion
+          ? () => setTypedLength(typedLength - 1)
+          : () => {
+              setCurrentIndex(nextIndex);
+              setNextIndex(null);
+              setTypedLength(reducedMotion ? taglines[nextIndex].length : 0);
+            };
+    } else if (typedLength < line.length) {
+      delay = 30;
+      step = () =>
+        setTypedLength(reducedMotion ? line.length : typedLength + 1);
+    } else {
+      return;
+    }
+    const timer = setTimeout(step, delay);
+    return () => clearTimeout(timer);
+  }, [nextIndex, typedLength, line]);
 
   const roll = () => {
-    if (outgoingIndex !== null) return;
-    setOutgoingIndex(currentIndex);
-    setCurrentIndex(pickNextTagline(currentIndex, taglines.length));
+    // ignore rolls until the current line has finished typing
+    if (nextIndex !== null || typedLength < line.length) return;
+    setNextIndex(pickNextTagline(currentIndex, taglines.length));
   };
 
   return (
@@ -47,21 +82,13 @@ export function Hero() {
           onPointerEnter={(event) => event.pointerType === "mouse" && roll()}
           onClick={roll}
         >
-          {outgoingIndex !== null && (
-            <span
-              key={`out-${outgoingIndex}`}
-              className={styles.rollOut}
-              aria-hidden
-              onAnimationEnd={() => setOutgoingIndex(null)}
-            >
-              {taglines[outgoingIndex]}
-            </span>
-          )}
-          <span
-            key={currentIndex}
-            className={outgoingIndex !== null ? styles.rollIn : undefined}
-          >
-            {taglines[currentIndex]}
+          <span className={styles.screenReaderOnly}>{line}</span>
+          <span className={styles.reserve} aria-hidden>
+            {longestTagline}
+          </span>
+          <span className={styles.typed} aria-hidden>
+            {line.slice(0, typedLength)}
+            <span className={styles.cursor}>_</span>
           </span>
         </p>
         <div className={styles.actions}>

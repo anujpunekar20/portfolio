@@ -55,41 +55,45 @@
   /* base gap (1rem) covers heading->tagline's 16px; this delta brings it to the spec's 20px */
   margin-top: 0.25rem;
   animation: powerOn 180ms steps(3) 500ms both;
-  /* outgoing and incoming lines share one cell, so the box fits the taller one */
+  /* the typed line sits on an invisible copy of the longest tagline, so the height never changes */
   display: grid;
-  overflow: hidden;
+  cursor: default;
 }
 
-.tagline > span {
+.reserve,
+.typed {
   grid-area: 1 / 1;
 }
 
-/* void-ui's ease-out: quick start, soft settle, so the swap feels fast but smooth */
-.rollOut {
-  animation: rollOut 300ms var(--void-ease-out) both;
+.reserve {
+  visibility: hidden;
 }
 
-.rollIn {
-  animation: rollIn 300ms var(--void-ease-out) both;
+/* the same underscore cursor as the AP_ logo, blinking on/off like a terminal */
+.cursor {
+  color: var(--void-accent);
+  animation: blink 1s steps(1) infinite;
 }
 
-@keyframes rollOut {
-  to {
-    transform: translateY(-100%);
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
-@keyframes rollIn {
-  from {
-    transform: translateY(100%);
-  }
+/* full line for screen readers; the typed copy is aria-hidden so it isn't read letter by letter */
+.screenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-/* 0s, not none: a zero-length animation still fires animationend, which ends the roll */
 @media (prefers-reduced-motion: reduce) {
-  .rollOut,
-  .rollIn {
-    animation-duration: 0s;
+  .cursor {
+    animation: none;
   }
 }
 
