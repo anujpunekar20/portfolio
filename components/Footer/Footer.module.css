@@ -3,11 +3,49 @@
   width: 100%;
   border-top: 1px solid var(--void-border);
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--void-text-disabled);
+  container-type: inline-size;
+}
+
+/* Kode Mono advances 0.6em per glyph: "ANUJ PUNEKAR" is 12 glyphs, 7.2em wide, so this fills the column.
+   No negative tracking: it leaves a stray sliver on the R, as in the hero. */
+.wordmark {
+  font-size: calc(100cqi / 7.2);
+  font-weight: 700;
+  line-height: 0.85;
+  color: var(--void-border);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* one step per glyph, finishing once the name is fully on screen (before the page bottoms out) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .wordmark {
+      animation: wordmarkReveal steps(12) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@keyframes wordmarkReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+.footerRow {
+  display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
-  font-size: 0.8125rem;
-  color: var(--void-text-disabled);
 }
 
 .available {
