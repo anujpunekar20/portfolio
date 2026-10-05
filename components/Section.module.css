@@ -1,11 +1,28 @@
 .section {
+  composes: band;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 4rem 3rem;
+  /* 1rem extra on top clears the band */
+  padding: 5rem 3rem 4rem;
   width: 100%;
   max-width: 56.25rem;
-  border-top: 1px solid var(--void-border);
+}
+
+/* Hatched strip across the top edge; its rules run out over the gutters to
+   the outer rails, so they cross the inner rails like a blueprint grid. */
+.band {
+  position: relative;
+}
+
+.band::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: -1rem;
+  height: 1rem;
+  border-block: 1px solid var(--void-border);
+  background: var(--rail-hatch);
 }
 
 .eyebrow {
