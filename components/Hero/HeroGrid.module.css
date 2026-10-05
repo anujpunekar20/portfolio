@@ -1,0 +1,75 @@
+/* Mouse and trackpad only: on touch there's no cursor to follow, so the grid isn't drawn at all. */
+.grid {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* hairline 4rem blueprint cells, lit up with the rest of the hero's power-on */
+  .grid {
+    /* half-strength hairlines: the grid is a backdrop, never competing with the name */
+    --grid-line: color-mix(in srgb, var(--void-border) 50%, transparent);
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0 / 4rem 4rem,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0 / 4rem
+        4rem;
+    animation: powerOn 180ms steps(3) 380ms both;
+  }
+
+  /* the cursor's cell: glides (not snaps) between cells, and fades in only while the pointer is in the hero */
+  .cell {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid var(--void-accent);
+    box-shadow: 3px 3px 0 0 var(--void-shadow);
+    opacity: 0;
+    translate: calc(var(--cell-x, 0) * 4rem) calc(var(--cell-y, 0) * 4rem);
+    transition:
+      opacity var(--void-duration-base) var(--void-ease-out),
+      translate var(--void-duration-slow) var(--void-ease-out);
+  }
+
+  .tracking .cell {
+    opacity: 1;
+  }
+
+  .hud {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--void-text-disabled);
+    white-space: nowrap;
+  }
+
+  .topLeft {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+
+  .topRight {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .bottomLeft {
+    bottom: 0.5rem;
+    left: 0.5rem;
+  }
+}
+
+@keyframes powerOn {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    animation: none;
+  }
+}

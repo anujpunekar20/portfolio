@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@anuj20/void-ui";
 import Image from "next/image";
 import { scrollToSection } from "@/lib/scroll";
+import { HeroGrid } from "./HeroGrid";
 import styles from "./Hero.module.css";
 
 // The first line types out on load (and is what crawlers see); the rest appear on roll.
@@ -102,6 +103,7 @@ function HeroTagline() {
 export function Hero() {
   return (
     <section id="home" className={styles.hero}>
+      <HeroGrid />
       <div className={styles.content}>
         {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- literal copy, not a stray comment */}
         <div className={styles.eyebrow}>// PORTFOLIO</div>
