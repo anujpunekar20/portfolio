@@ -40,7 +40,7 @@
   color: var(--void-text-muted);
   cursor: default;
   user-select: none;
-  transition: color 0.15s;
+  transition: color var(--void-duration-base) var(--void-ease-out);
 }
 
 .slot:hover {
