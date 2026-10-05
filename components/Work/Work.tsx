@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "@anuj20/void-ui";
 import Image from "next/image";
 import { experience } from "@/lib/data";
 import { Inventory } from "../Inventory/Inventory";
@@ -19,14 +18,21 @@ export function Work() {
         Comfortable with API design, schema design, and component-driven UI
         across fast-moving product teams.
       </p>
-      <div className={styles.skills}>
-        <Inventory />
-      </div>
       <div className={styles.list}>
-        {experience.map((job, i) => (
-          <Card key={job.company}>
-            <details className={styles.job} open={i === 0}>
+        {experience.map((job, i) => {
+          const isCurrent = job.dates.endsWith("Present");
+          return (
+            <details
+              key={job.company}
+              className={`${styles.job} ${isCurrent ? styles.current : ""}`}
+              open={i === 0}
+            >
               <summary className={styles.summaryRow}>
+                <span className={styles.dates}>
+                  {job.dates.split(" — ").map((date) => (
+                    <span key={date}>{date}</span>
+                  ))}
+                </span>
                 {job.logo && (
                   <Image
                     src={job.logo}
@@ -37,19 +43,16 @@ export function Work() {
                   />
                 )}
                 <div className={styles.head}>
-                  <div className={styles.row}>
-                    <span className={styles.company}>
-                      {job.company}
-                      {job.dates.endsWith("Present") ? (
-                        <span className={`${styles.status} ${styles.active}`}>
-                          In progress
-                        </span>
-                      ) : (
-                        <span className={styles.status}>Complete</span>
-                      )}
-                    </span>
-                    <span className={styles.dates}>{job.dates}</span>
-                  </div>
+                  <span className={styles.company}>
+                    {job.company}
+                    {isCurrent ? (
+                      <span className={`${styles.status} ${styles.active}`}>
+                        In progress
+                      </span>
+                    ) : (
+                      <span className={styles.status}>Complete</span>
+                    )}
+                  </span>
                   <div className={styles.role}>{job.role}</div>
                   <p className={styles.desc}>{job.desc}</p>
                 </div>
@@ -77,8 +80,11 @@ export function Work() {
                 </div>
               </div>
             </details>
-          </Card>
-        ))}
+          );
+        })}
+      </div>
+      <div className={styles.skills}>
+        <Inventory />
       </div>
     </section>
   );
