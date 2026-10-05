@@ -122,7 +122,7 @@
   visibility: hidden;
 }
 
-/* not-yet-decoded glyphs ahead of the cursor: dimmer than the typed text */
+/* the not-yet-decoded rest of a rolled line: dimmer than the typed text */
 .scramble {
   color: var(--void-text-disabled);
 }

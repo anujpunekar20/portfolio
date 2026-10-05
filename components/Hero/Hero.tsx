@@ -29,16 +29,14 @@ function pickNextTagline(currentIndex: number, count: number): number {
   return nextIndex >= currentIndex ? nextIndex + 1 : nextIndex;
 }
 
-// The glyphs that run just ahead of the cursor while a rolled tagline types in, so the line
-// decodes rather than plainly typing. `remaining` is the part of the line not typed yet.
-function scrambledTail(remaining: string): string {
+// A rolled line first appears in full as symbol noise, then decodes left to right as it types.
+// Spaces stay spaces, so the word shapes show through the noise.
+function scrambleLine(line: string): string {
   const glyphs = "#%&@*";
-  // up to 3 glyphs lead the cursor, one per upcoming character, so the line never grows past its length
-  return remaining
-    .slice(0, 3)
-    .split("")
-    .map(() => glyphs[Math.floor(Math.random() * glyphs.length)])
-    .join("");
+  return line.replace(
+    /\S/g,
+    () => glyphs[Math.floor(Math.random() * glyphs.length)],
+  );
 }
 
 // Holds the typing state, so each typed character re-renders only the tagline, not the whole hero.
@@ -47,8 +45,8 @@ function HeroTagline() {
   // the line queued to type once the current one is backspaced; null when not rolling
   const [nextIndex, setNextIndex] = useState<number | null>(null);
   const [typedLength, setTypedLength] = useState(0);
-  // the first line just types; only rolled lines decode through scrambled glyphs
-  const [rolled, setRolled] = useState(false);
+  // the noise a rolled line decodes from; null for the first line, which just types
+  const [scrambledLine, setScrambledLine] = useState<string | null>(null);
   const line = taglines[currentIndex];
 
   // One character per tick: backspace fast, then type. Reduced motion jumps straight to the end.
@@ -86,8 +84,9 @@ function HeroTagline() {
       setTypedLength(line.length);
       return;
     }
-    setRolled(true);
-    setNextIndex(pickNextTagline(currentIndex, taglines.length));
+    const rolledIndex = pickNextTagline(currentIndex, taglines.length);
+    setScrambledLine(scrambleLine(taglines[rolledIndex]));
+    setNextIndex(rolledIndex);
   };
 
   // hover rolls it with a mouse, tap rolls it on touch
@@ -103,17 +102,18 @@ function HeroTagline() {
       </span>
       <span className={styles.typed} aria-hidden>
         {line.slice(0, typedLength)}
-        {rolled && nextIndex === null && typedLength < line.length && (
-          <span className={styles.scramble}>
-            {scrambledTail(line.slice(typedLength))}
-          </span>
-        )}
         {/* solid while typing, then blinks a few times and stops (WCAG 2.2.2) */}
         <span
           className={`${styles.cursor} ${typedLength === line.length && nextIndex === null ? styles.blinking : ""}`}
         >
           _
         </span>
+        {/* the cursor stands in for the next character, so the decoding line keeps its final length */}
+        {scrambledLine !== null && nextIndex === null && (
+          <span className={styles.scramble}>
+            {scrambledLine.slice(typedLength + 1)}
+          </span>
+        )}
       </span>
     </p>
   );
