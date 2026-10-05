@@ -69,10 +69,14 @@
   visibility: hidden;
 }
 
-/* the same underscore cursor as the AP_ logo, blinking on/off like a terminal */
+/* the same underscore cursor as the AP_ logo */
 .cursor {
   color: var(--void-accent);
-  animation: blink 1s steps(1) infinite;
+}
+
+/* blinks like a terminal once a line is typed, then stops solid after 5s (WCAG 2.2.2) */
+.blinking {
+  animation: blink 1s steps(1) 5;
 }
 
 @keyframes blink {
@@ -92,7 +96,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cursor {
+  .blinking {
     animation: none;
   }
 }
