@@ -47,3 +47,24 @@
   font-size: 0.875rem;
   color: var(--void-text-muted);
 }
+
+/* replies type out like terminal output */
+.statusText {
+  display: inline-block;
+  animation: typeOn 240ms steps(20) backwards;
+}
+
+@keyframes typeOn {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusText {
+    animation: none;
+  }
+}

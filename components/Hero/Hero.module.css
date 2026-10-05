@@ -51,7 +51,7 @@
   color: var(--void-accent);
   letter-spacing: 0.125rem;
   /* one step per character of "// PORTFOLIO"; monospace makes each step land on a glyph */
-  animation: typeOn 360ms steps(12) 100ms both;
+  animation: typeOn 360ms steps(12) 100ms backwards;
 }
 
 /* Kode Mono advances 0.6em per glyph, so "PUNEKAR" is 4.2em wide: 23cqi fills the column on phones,
@@ -166,6 +166,9 @@
 @keyframes typeOn {
   from {
     clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
   }
 }
 

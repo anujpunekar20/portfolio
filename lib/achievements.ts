@@ -13,6 +13,10 @@ export const achievements = {
   },
   "line-clear": { title: "Line clear", description: "Cleared a row in Tetris" },
   "cheat-code": { title: "Cheat code", description: "Hey, you know this?" },
+  "party-up": {
+    title: "So we frens now?",
+    description: "Thank you! I'll get back to you soon!",
+  },
 };
 
 export type AchievementId = keyof typeof achievements;

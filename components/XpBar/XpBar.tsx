@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { unlockAchievement } from "@/lib/achievements";
 import { SECTION_IDS, useActiveSection } from "@/lib/useActiveSection";
 import styles from "./XpBar.module.css";
@@ -11,6 +11,9 @@ export function XpBar() {
   // Home is level 0, so each level matches its section's NN / eyebrow
   const level = SECTION_IDS.indexOf(activeSection);
   const isMaxLevel = level === SECTION_IDS.length - 1;
+  // Only a new high flashes the readout, not scrolling back up to a lower level.
+  const [highestLevel, setHighestLevel] = useState(0);
+  if (level > highestLevel) setHighestLevel(level);
 
   useEffect(() => {
     if (activeSection === "contact") unlockAchievement("completionist");
@@ -28,7 +31,11 @@ export function XpBar() {
         />
       </div>
       <span className={styles.level}>
-        <span className={styles.levelNumber}>
+        <span
+          // a new key remounts the span, which replays the level-up flash
+          key={highestLevel}
+          className={`${styles.levelNumber} ${highestLevel > 0 ? styles.levelUp : ""}`}
+        >
           {isMaxLevel ? "LV MAX" : `LV ${level}`}
         </span>{" "}
         {activeSection.toUpperCase()}
