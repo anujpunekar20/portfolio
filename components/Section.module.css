@@ -47,7 +47,8 @@
   }
 }
 
-/* Corner brackets snap out around a row on hover or keyboard focus.
+/* Corner brackets snap out around a row on hover or keyboard focus (:focus-visible, so a
+   mouse click that focuses the row doesn't leave them stuck on).
    Each corner is two 1px arms, drawn as solid-color gradient layers. */
 .bracketed {
   position: relative;
@@ -77,7 +78,8 @@
   }
 
   .bracketed:hover::after,
-  .bracketed:focus-within::after {
+  .bracketed:focus-visible::after,
+  .bracketed:has(:focus-visible)::after {
     inset: -0.75rem;
     opacity: 1;
   }
