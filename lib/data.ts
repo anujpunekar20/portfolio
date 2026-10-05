@@ -77,13 +77,13 @@ export const experience: Job[] = [
     company: "Wauld",
     role: "Associate Software Engineer",
     dates: "Jul '25 — Apr '26",
-    desc: "Owned the Go credential API — 5,000+ credentials issued for 350+ users.",
+    desc: "Owned the Go credential API — 10,000+ credentials issued, 450+ users on the platform.",
     logo: "/logos/wauld.jpg",
     stack: ["Golang", "ConnectRPC", "Ent ORM", "PostgreSQL", "SvelteKit"],
     projects: [
       {
         bullets: [
-          "Owned the credential lifecycle API in Go (issuance, revocation, expiry, downloads) serving 5,000+ credentials across 350+ users with role-based access.",
+          "Owned the credential lifecycle API in Go (issuance, revocation, expiry, downloads) serving 10,000+ credentials across 450+ users with role-based access.",
           "Built the image-attribute feature end-to-end: data model, API contracts, a draft/publish flow, and the Svelte designer UI.",
           "Shipped bulk credential operations (send, void, download, reporting) with async email notifications.",
           "Added a credential-expiry notification pipeline with graduated alerts and a background migration worker.",

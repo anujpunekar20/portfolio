@@ -1,10 +1,12 @@
 .hero {
   min-height: 85%;
+  /* grow with the content instead of shrinking to the min-height and spilling into About */
+  flex-shrink: 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  padding: 0 3rem;
+  flex-direction: column;
+  /* safe: when the content outgrows the box (phones), start at the top instead of spilling under the nav */
+  justify-content: safe center;
+  padding: 3rem;
   width: 100%;
   max-width: 56.25rem;
 }
@@ -13,12 +15,24 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  /* lets the name size itself to the column (cqi), not the viewport */
+  container-type: inline-size;
+}
+
+/* the photo and the stat sheet read as one player card */
+.player {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  align-items: start;
+  gap: 1.5rem;
+  /* base gap (1rem) + delta: a beat of space between the tagline and the card */
+  margin-top: 1rem;
+  animation: powerOn 180ms steps(3) 530ms both;
 }
 
 .photo {
-  width: 15rem;
-  height: 15rem;
-  flex-shrink: 0;
+  width: 9rem;
+  height: 9rem;
   object-fit: cover;
   /* portrait source photo: window shifted 20% down the image to show more body */
   object-position: 50% 20%;
@@ -40,11 +54,50 @@
   animation: typeOn 360ms steps(12) 100ms both;
 }
 
+/* Kode Mono advances 0.6em per glyph, so "PUNEKAR" is 4.2em wide: 23cqi fills the column on phones,
+   7rem caps it on wider screens. No negative tracking: it leaves a stray sliver on the R at this size. */
 .heading {
-  font-size: 3.5rem;
-  line-height: 1.1;
+  font-size: min(23cqi, 7rem);
+  line-height: 0.9;
+  /* the browser's 0.67em h1 margin would be ~8rem at this size */
+  margin: 0.5rem 0 0;
   font-weight: 700;
+  text-transform: uppercase;
   animation: powerOn 180ms steps(3) 440ms both;
+}
+
+.heading span {
+  display: block;
+}
+
+/* the same ruled rows as a project spec sheet; HI-SCORE is earned, so it's lit */
+.stats {
+  margin: 0;
+  border-bottom: 1px solid var(--void-border);
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--void-border);
+}
+
+.statRow dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+  color: var(--void-text-muted);
+}
+
+.statRow dd {
+  margin: 0;
+}
+
+.lit {
+  color: var(--void-accent);
 }
 
 .tagline {
@@ -133,21 +186,30 @@
   .heading,
   .tagline,
   .actions,
+  .player,
   .photo {
     animation: none;
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 40rem) {
   .hero {
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
+    padding: 2rem 3rem;
+  }
+
+  .player {
+    grid-template-columns: 5rem 1fr;
+    gap: 1rem;
   }
 
   .photo {
-    width: 10rem;
-    height: 10rem;
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .statRow {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: 0.5rem 0;
   }
 }
