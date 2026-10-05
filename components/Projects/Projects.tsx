@@ -1,12 +1,9 @@
 "use client";
 
-import { Card, Tooltip } from "@anuj20/void-ui";
 import Image from "next/image";
 import { SkillChip } from "../SkillChip/SkillChip";
-import { ExternalLinkIcon, GithubIcon } from "../Icons";
 import { projects } from "@/lib/data";
 import sectionStyles from "../Section.module.css";
-import iconChipStyles from "../IconChip.module.css";
 import styles from "./Projects.module.css";
 
 export function Projects() {
@@ -15,61 +12,58 @@ export function Projects() {
       <div className={sectionStyles.eyebrow}>03 / PROJECTS</div>
       <h2 className={sectionStyles.heading}>Projects</h2>
       <div className={styles.list}>
-        {projects.map((project) => (
-          <Card key={project.name}>
-            <div className={styles.cardInner}>
-              {project.image && (
-                <Image
-                  src={project.image}
-                  alt={`${project.name} screenshot`}
-                  width={480}
-                  height={300}
-                  className={styles.image}
-                />
-              )}
-              <div className={styles.content}>
-                <div className={styles.title}>{project.name}</div>
-                <p className={styles.desc}>{project.desc}</p>
-                <div className={styles.tags}>
+        {projects.map((project, i) => (
+          <article key={project.name} className={styles.project}>
+            <div className={styles.header}>
+              <span className={styles.index}>
+                P-{String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className={styles.title}>{project.name}</h3>
+            </div>
+            {project.image && (
+              <Image
+                src={project.image}
+                alt={`${project.name} screenshot`}
+                width={700}
+                height={220}
+                className={styles.image}
+              />
+            )}
+            <p className={styles.desc}>{project.desc}</p>
+            <dl className={styles.spec}>
+              <div className={styles.specRow}>
+                <dt>Stack</dt>
+                <dd className={styles.tags}>
                   {project.tags.map((tag) => (
                     <SkillChip key={tag} name={tag} />
                   ))}
-                </div>
-                <div className={styles.links}>
-                  <Tooltip
-                    label="GitHub"
-                    trigger={
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener"
-                        aria-label="GitHub"
-                        className={iconChipStyles.iconChip}
-                      >
-                        <GithubIcon />
-                      </a>
-                    }
-                  />
-                  {project.live && (
-                    <Tooltip
-                      label="Live"
-                      trigger={
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener"
-                          aria-label="Live"
-                          className={iconChipStyles.iconChip}
-                        >
-                          <ExternalLinkIcon />
-                        </a>
-                      }
-                    />
-                  )}
-                </div>
+                </dd>
               </div>
-            </div>
-          </Card>
+              <div className={styles.specRow}>
+                <dt>Links</dt>
+                <dd className={styles.links}>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`${project.name} source on GitHub`}
+                  >
+                    Source <span aria-hidden>↗</span>
+                  </a>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener"
+                      aria-label={`${project.name} live demo`}
+                    >
+                      Live <span aria-hidden>↗</span>
+                    </a>
+                  )}
+                </dd>
+              </div>
+            </dl>
+          </article>
         ))}
       </div>
     </section>
