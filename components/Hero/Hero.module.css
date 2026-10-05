@@ -55,6 +55,42 @@
   /* base gap (1rem) covers heading->tagline's 16px; this delta brings it to the spec's 20px */
   margin-top: 0.25rem;
   animation: powerOn 180ms steps(3) 500ms both;
+  /* outgoing and incoming lines share one cell, so the box fits the taller one */
+  display: grid;
+  overflow: hidden;
+}
+
+.tagline > span {
+  grid-area: 1 / 1;
+}
+
+/* steps() snaps the roll like an arcade attract screen, matching the achievement toast */
+.rollOut {
+  animation: rollOut 200ms steps(4) both;
+}
+
+.rollIn {
+  animation: rollIn 200ms steps(4) both;
+}
+
+@keyframes rollOut {
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes rollIn {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+/* 0s, not none: a zero-length animation still fires animationend, which ends the roll */
+@media (prefers-reduced-motion: reduce) {
+  .rollOut,
+  .rollIn {
+    animation-duration: 0s;
+  }
 }
 
 .actions {
