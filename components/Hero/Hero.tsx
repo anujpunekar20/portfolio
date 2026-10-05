@@ -105,8 +105,38 @@ export function Hero() {
       <div className={styles.content}>
         {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- literal copy, not a stray comment */}
         <div className={styles.eyebrow}>// PORTFOLIO</div>
-        <h1 className={styles.heading}>Hi, I&apos;m Anuj Punekar</h1>
+        {/* title-screen scale: each word on its own line, sized to fill the column */}
+        <h1 className={styles.heading}>
+          <span>Anuj</span> <span>Punekar</span>
+        </h1>
         <HeroTagline />
+        <div className={styles.player}>
+          <Image
+            src="/anuj-punekar.jpeg"
+            alt="Anuj Punekar"
+            width={144}
+            height={144}
+            priority
+            className={styles.photo}
+          />
+          <dl className={styles.stats}>
+            <div className={styles.statRow}>
+              <dt>CLASS</dt>
+              <dd>Full-stack, backend-first</dd>
+            </div>
+            <div className={styles.statRow}>
+              <dt>MAIN</dt>
+              <dd>Go&nbsp;· gRPC&nbsp;· React&nbsp;· Svelte</dd>
+            </div>
+            <div className={styles.statRow}>
+              <dt>HI-SCORE</dt>
+              <dd>
+                Go credential API: <span className={styles.lit}>10,000+</span>{" "}
+                issued, <span className={styles.lit}>450+</span> users
+              </dd>
+            </div>
+          </dl>
+        </div>
         <div className={styles.actions}>
           <Button
             href="#projects"
@@ -125,15 +155,6 @@ export function Hero() {
           </Button>
         </div>
       </div>
-
-      <Image
-        src="/anuj-punekar.jpeg"
-        alt="Anuj Punekar"
-        width={280}
-        height={280}
-        priority
-        className={styles.photo}
-      />
     </section>
   );
 }
