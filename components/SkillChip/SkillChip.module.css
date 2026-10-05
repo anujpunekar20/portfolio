@@ -8,9 +8,9 @@
   color: var(--void-text-muted);
   cursor: default;
   user-select: none;
-  transition:
-    color 0.15s,
-    border-color 0.15s;
+  transition-property: color, border-color;
+  transition-duration: var(--void-duration-base);
+  transition-timing-function: var(--void-ease-out);
 }
 
 .chip:hover {

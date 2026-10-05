@@ -252,6 +252,7 @@ export function Tetris() {
         {touchControls.map((control) => (
           <button
             key={control.name}
+            className={styles.touchButton}
             aria-label={control.name}
             onClick={() =>
               window.dispatchEvent(

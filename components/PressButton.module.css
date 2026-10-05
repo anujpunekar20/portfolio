@@ -1,0 +1,29 @@
+/* Mirrors void-ui's Button press physics so bespoke buttons match it.
+   The duration/easing tokens drop to 0ms under prefers-reduced-motion. */
+.pressButton {
+  cursor: pointer;
+  box-shadow: 3px 3px 0 0 var(--void-shadow);
+  transition-property:
+    transform, box-shadow, background-color, color, border-color;
+  transition-duration: var(--void-duration-base);
+  transition-timing-function: var(--void-ease-out);
+}
+
+/* Hover lift only where hover is real, so tapped touch buttons don't stay lifted. */
+@media (hover: hover) {
+  .pressButton:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 var(--void-shadow);
+  }
+}
+
+.pressButton:focus-visible {
+  outline: 2px solid var(--void-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--void-accent-glow);
+}
+
+.pressButton:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
