@@ -122,6 +122,11 @@
   visibility: hidden;
 }
 
+/* the not-yet-decoded rest of a rolled line: dimmer than the typed text */
+.scramble {
+  color: var(--void-text-disabled);
+}
+
 /* the same underscore cursor as the AP_ logo */
 .cursor {
   color: var(--void-accent);

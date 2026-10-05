@@ -29,12 +29,24 @@ function pickNextTagline(currentIndex: number, count: number): number {
   return nextIndex >= currentIndex ? nextIndex + 1 : nextIndex;
 }
 
+// A rolled line first appears in full as symbol noise, then decodes left to right as it types.
+// Spaces stay spaces, so the word shapes show through the noise.
+function scrambleLine(line: string): string {
+  const glyphs = "#%&@*";
+  return line.replace(
+    /\S/g,
+    () => glyphs[Math.floor(Math.random() * glyphs.length)],
+  );
+}
+
 // Holds the typing state, so each typed character re-renders only the tagline, not the whole hero.
 function HeroTagline() {
   const [currentIndex, setCurrentIndex] = useState(0);
   // the line queued to type once the current one is backspaced; null when not rolling
   const [nextIndex, setNextIndex] = useState<number | null>(null);
   const [typedLength, setTypedLength] = useState(0);
+  // the noise a rolled line decodes from; null for the first line, which just types
+  const [scrambledLine, setScrambledLine] = useState<string | null>(null);
   const line = taglines[currentIndex];
 
   // One character per tick: backspace fast, then type. Reduced motion jumps straight to the end.
@@ -72,7 +84,9 @@ function HeroTagline() {
       setTypedLength(line.length);
       return;
     }
-    setNextIndex(pickNextTagline(currentIndex, taglines.length));
+    const rolledIndex = pickNextTagline(currentIndex, taglines.length);
+    setScrambledLine(scrambleLine(taglines[rolledIndex]));
+    setNextIndex(rolledIndex);
   };
 
   // hover rolls it with a mouse, tap rolls it on touch
@@ -94,6 +108,12 @@ function HeroTagline() {
         >
           _
         </span>
+        {/* the cursor stands in for the next character, so the decoding line keeps its final length */}
+        {scrambledLine !== null && nextIndex === null && (
+          <span className={styles.scramble}>
+            {scrambledLine.slice(typedLength + 1)}
+          </span>
+        )}
       </span>
     </p>
   );
