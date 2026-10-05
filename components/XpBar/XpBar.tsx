@@ -8,8 +8,9 @@ import styles from "./XpBar.module.css";
 // Scroll progress as a segmented XP bar, levelled up by the section in view.
 export function XpBar() {
   const { activeSection, progress } = useActiveSection();
-  const level = SECTION_IDS.indexOf(activeSection) + 1;
-  const isMaxLevel = level === SECTION_IDS.length;
+  // Home is level 0, so each level matches its section's NN / eyebrow
+  const level = SECTION_IDS.indexOf(activeSection);
+  const isMaxLevel = level === SECTION_IDS.length - 1;
 
   useEffect(() => {
     if (activeSection === "contact") unlockAchievement("completionist");
@@ -21,7 +22,10 @@ export function XpBar() {
       aria-hidden="true"
     >
       <div className={styles.track}>
-        <div className={styles.fill} style={{ width: `${progress * 100}%` }} />
+        <div
+          className={styles.fill}
+          style={{ clipPath: `inset(0 ${100 - progress * 100}% 0 0)` }}
+        />
       </div>
       <span className={styles.level}>
         <span className={styles.levelNumber}>

@@ -16,7 +16,9 @@
   border: 1px solid var(--void-border);
 }
 
-/* Gaps every 0.75rem cut the fill into blocks, like a game's XP meter. */
+/* Gaps every 0.75rem cut the fill into blocks, like a game's XP meter.
+   Progress clips a full-width fill (not width or scaleX), so it never triggers
+   layout and the blocks keep their size. */
 .fill {
   position: relative;
   height: 100%;
@@ -26,7 +28,7 @@
     #000 0 0.625rem,
     transparent 0.625rem 0.75rem
   );
-  transition: width 150ms ease-out;
+  transition: clip-path 150ms ease-out;
 }
 
 /* Max level: a gradient fades in over the accent (gradients can't transition). */
