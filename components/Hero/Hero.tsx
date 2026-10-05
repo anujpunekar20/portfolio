@@ -29,12 +29,26 @@ function pickNextTagline(currentIndex: number, count: number): number {
   return nextIndex >= currentIndex ? nextIndex + 1 : nextIndex;
 }
 
+// The glyphs that run just ahead of the cursor while a rolled tagline types in, so the line
+// decodes rather than plainly typing. `remaining` is the part of the line not typed yet.
+function scrambledTail(remaining: string): string {
+  const glyphs = "#%&@*";
+  // up to 3 glyphs lead the cursor, one per upcoming character, so the line never grows past its length
+  return remaining
+    .slice(0, 3)
+    .split("")
+    .map(() => glyphs[Math.floor(Math.random() * glyphs.length)])
+    .join("");
+}
+
 // Holds the typing state, so each typed character re-renders only the tagline, not the whole hero.
 function HeroTagline() {
   const [currentIndex, setCurrentIndex] = useState(0);
   // the line queued to type once the current one is backspaced; null when not rolling
   const [nextIndex, setNextIndex] = useState<number | null>(null);
   const [typedLength, setTypedLength] = useState(0);
+  // the first line just types; only rolled lines decode through scrambled glyphs
+  const [rolled, setRolled] = useState(false);
   const line = taglines[currentIndex];
 
   // One character per tick: backspace fast, then type. Reduced motion jumps straight to the end.
@@ -72,6 +86,7 @@ function HeroTagline() {
       setTypedLength(line.length);
       return;
     }
+    setRolled(true);
     setNextIndex(pickNextTagline(currentIndex, taglines.length));
   };
 
@@ -88,6 +103,11 @@ function HeroTagline() {
       </span>
       <span className={styles.typed} aria-hidden>
         {line.slice(0, typedLength)}
+        {rolled && nextIndex === null && typedLength < line.length && (
+          <span className={styles.scramble}>
+            {scrambledTail(line.slice(typedLength))}
+          </span>
+        )}
         {/* solid while typing, then blinks a few times and stops (WCAG 2.2.2) */}
         <span
           className={`${styles.cursor} ${typedLength === line.length && nextIndex === null ? styles.blinking : ""}`}
