@@ -64,13 +64,13 @@
   grid-area: 1 / 1;
 }
 
-/* steps() snaps the roll like an arcade attract screen, matching the achievement toast */
+/* void-ui's ease-out: quick start, soft settle, so the swap feels fast but smooth */
 .rollOut {
-  animation: rollOut 200ms steps(4) both;
+  animation: rollOut 300ms var(--void-ease-out) both;
 }
 
 .rollIn {
-  animation: rollIn 200ms steps(4) both;
+  animation: rollIn 300ms var(--void-ease-out) both;
 }
 
 @keyframes rollOut {
