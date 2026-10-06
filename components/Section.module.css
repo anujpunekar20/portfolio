@@ -20,8 +20,8 @@
 }
 
 /* The heading wave: a hard-edged violet band sweeps across each section heading once, when
-   HeadingWaveTrigger marks it fully in view. The band sits in the middle third of a 300%-wide
-   gradient, so both ends of the sweep are solid text. */
+   HeadingWaveTrigger sees it reach the middle of the screen. The band sits in the middle third
+   of a 300%-wide gradient, so both ends of the sweep are solid text. */
 @media (prefers-reduced-motion: no-preference) {
   .heading {
     width: fit-content;
