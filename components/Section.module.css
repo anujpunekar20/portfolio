@@ -49,7 +49,8 @@
 
 /* Corner brackets snap out around a row on hover or keyboard focus (:focus-visible, so a
    mouse click that focuses the row doesn't leave them stuck on).
-   Each corner is two 1px arms, drawn as solid-color gradient layers. */
+   Each corner is two 1px arms, drawn as solid-color gradient layers.
+   A padded consumer can pull them inward with --bracket-rest / --bracket-hover. */
 .bracketed {
   position: relative;
 }
@@ -59,7 +60,7 @@
     --arm: 0.75rem;
     content: "";
     position: absolute;
-    inset: -0.25rem;
+    inset: var(--bracket-rest, -0.25rem);
     pointer-events: none;
     opacity: 0;
     background:
@@ -80,7 +81,7 @@
   .bracketed:hover::after,
   .bracketed:focus-visible::after,
   .bracketed:has(:focus-visible)::after {
-    inset: -0.75rem;
+    inset: var(--bracket-hover, -0.75rem);
     opacity: 1;
   }
 }
