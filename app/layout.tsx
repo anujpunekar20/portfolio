@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "@anuj20/void-ui/styles";
+import { HeadingWaveTrigger } from "@/components/HeadingWaveTrigger/HeadingWaveTrigger";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en">
       <body>
         {children}
+        <HeadingWaveTrigger />
         <Analytics />
       </body>
     </html>

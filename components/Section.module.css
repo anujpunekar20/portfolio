@@ -18,3 +18,70 @@
   font-size: 2rem;
   margin: 0;
 }
+
+/* The heading wave: a hard-edged violet band sweeps across each section heading once, when
+   HeadingWaveTrigger sees it reach the middle of the screen. The band sits in the middle third
+   of a 300%-wide gradient, so both ends of the sweep are solid text. */
+@media (prefers-reduced-motion: no-preference) {
+  .heading {
+    width: fit-content;
+    background: linear-gradient(
+        90deg,
+        var(--void-text-primary) 45%,
+        var(--void-accent) 45% 55%,
+        var(--void-text-primary) 55%
+      )
+      100% 0 / 300% 100% no-repeat;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .heading[data-wave-played] {
+    animation: headingWave 1.4s ease-in-out both;
+  }
+}
+
+@keyframes headingWave {
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Corner brackets snap out around a row on hover or keyboard focus (:focus-visible, so a
+   mouse click that focuses the row doesn't leave them stuck on).
+   Each corner is two 1px arms, drawn as solid-color gradient layers.
+   A padded consumer can pull them inward with --bracket-rest / --bracket-hover. */
+.bracketed {
+  position: relative;
+}
+
+@media (hover: hover) {
+  .bracketed::after {
+    --arm: 0.75rem;
+    content: "";
+    position: absolute;
+    inset: var(--bracket-rest, -0.25rem);
+    pointer-events: none;
+    opacity: 0;
+    background:
+      linear-gradient(var(--void-accent) 0 0) top left / var(--arm) 1px,
+      linear-gradient(var(--void-accent) 0 0) top left / 1px var(--arm),
+      linear-gradient(var(--void-accent) 0 0) top right / var(--arm) 1px,
+      linear-gradient(var(--void-accent) 0 0) top right / 1px var(--arm),
+      linear-gradient(var(--void-accent) 0 0) bottom left / var(--arm) 1px,
+      linear-gradient(var(--void-accent) 0 0) bottom left / 1px var(--arm),
+      linear-gradient(var(--void-accent) 0 0) bottom right / var(--arm) 1px,
+      linear-gradient(var(--void-accent) 0 0) bottom right / 1px var(--arm);
+    background-repeat: no-repeat;
+    transition:
+      inset var(--void-duration-base) var(--void-ease-out),
+      opacity var(--void-duration-base) var(--void-ease-out);
+  }
+
+  .bracketed:hover::after,
+  .bracketed:focus-visible::after,
+  .bracketed:has(:focus-visible)::after {
+    inset: var(--bracket-hover, -0.75rem);
+    opacity: 1;
+  }
+}

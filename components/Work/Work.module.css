@@ -24,6 +24,10 @@
    interpolate-size lets block-size transition to `auto`; browsers without
    ::details-content support just toggle instantly. */
 .job {
+  /* bracket the whole quest, expanded objectives included, not just its summary row */
+  composes: bracketed from "../Section.module.css";
+  --bracket-rest: 0.5rem;
+  --bracket-hover: 0;
   padding: 1.25rem 1rem;
   border-top: 1px solid var(--void-border);
   /* same 2px bar the command palette uses for its selected row */
