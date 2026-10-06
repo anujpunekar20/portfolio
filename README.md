@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+Anuj Punekar's personal site: work experience, projects, and a playable Tetris. Live at **[anujpunekar.vercel.app](https://anujpunekar.vercel.app)**.
 
-First, run the development server:
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router, TypeScript)
+- [`@anuj20/void-ui`](https://www.npmjs.com/package/@anuj20/void-ui) for UI components, a dark, brutalist React library I maintain
+- CSS Modules themed against void-ui's `--void-*` custom properties (no Tailwind)
+- [Resend](https://resend.com) REST API for the contact form
+- Deployed on [Vercel](https://vercel.com)
+
+## Features
+
+- **Command palette** (`Ctrl/Cmd + K`): the site's only section navigation
+- **Tetris**: plain DOM blocks over the page, with high score, next-piece preview, ghost piece, and touch controls. Hit **▶ PLAY**.
+- **Achievements**: once-per-browser trophies (try the Konami code)
+- **XP bar**: shows scroll progress through the sections
+- **Contact form** with server-side validation and a honeypot, plus a [Book a call](https://cal.com/anuj-punekar) link
+
+## Running locally
+
+Requires Node 24 and pnpm.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The contact form needs a Resend key in `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+RESEND_API_KEY=re_...
+```
 
-## Learn More
+## Checks
 
-To learn more about Next.js, take a look at the following resources:
+CI (`.github/workflows/checks.yml`) runs these on every PR:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm format:check
+pnpm lint
+pnpm exec next typegen && pnpm exec tsc --noEmit
+node lib/tetris.check.ts
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project layout
 
-## Deploy on Vercel
+```
+app/          routes, root layout, 404, OG image, /api/contact
+components/   one folder per component (Component.tsx + Component.module.css)
+lib/          content data, Tetris logic, achievements, window event names
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Site content (jobs, projects, skills) lives in `lib/data.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Merges to `main` deploy to production automatically. PRs get Vercel preview deployments.
