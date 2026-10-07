@@ -37,8 +37,7 @@
   }
 
   .heading[data-wave-played] {
-    animation: headingWave var(--void-duration-base) var(--void-ease-in-out)
-      both;
+    animation: headingWave 1.4s ease-in-out both;
   }
 }
 
