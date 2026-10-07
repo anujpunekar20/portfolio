@@ -20,7 +20,6 @@
    Progress clips a full-width fill (not width or scaleX), so it never triggers
    layout and the blocks keep their size. */
 .fill {
-  position: relative;
   height: 100%;
   background: var(--void-accent);
   mask-image: repeating-linear-gradient(
@@ -31,24 +30,11 @@
   transition: clip-path 150ms ease-out;
 }
 
-/* Max level: a gradient fades in over the accent (gradients can't transition). */
-.fill::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, var(--void-accent), #ff6ec7, #ffd166);
-  opacity: 0;
-  transition: opacity 400ms ease-out;
-}
-
-.maxed .fill::after {
-  opacity: 1;
-}
-
+/* Max level: the readout stays in the level-up flash's inverse video. */
 .maxed .levelNumber {
-  background: linear-gradient(to right, #ff6ec7, #ffd166);
-  background-clip: text;
-  color: transparent;
+  color: var(--void-bg-base);
+  background: var(--void-accent);
+  box-shadow: 0 0 0 2px var(--void-accent);
 }
 
 .level {
@@ -77,8 +63,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fill,
-  .fill::after {
+  .fill {
     transition: none;
   }
 
